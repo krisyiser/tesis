@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface PlaceCardProps {
   title: string;
-  description: string;
+  description?: string;
   imageUrl: string;
   category?: string;
   rating?: string;
@@ -17,7 +17,7 @@ interface PlaceCardProps {
 
 export default function PlaceCard({
   title,
-  description,
+  description = "",
   imageUrl,
   category,
   rating,
