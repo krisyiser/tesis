@@ -2,25 +2,14 @@
 
 import { motion } from "framer-motion";
 import iOSCard from "@/components/iOSCard";
-import SegmentedControl from "@/components/SegmentedControl";
-import { Utensils, Star, MapPin } from "lucide-react";
+import { Utensils, Star, MapPin, ChevronRight, Pizza, ChefHat } from "lucide-react";
 
-const traditionalDishes = [
-  {
-    title: "Zacahuil",
-    subtitle: "El Rey de los Tamales",
-    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80",
-  },
-  {
-    title: "Mole Papanteco",
-    subtitle: "Sabor de Fiesta",
-    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80",
-  },
-  {
-    title: "Bocoles",
-    subtitle: "Delicia Totonaca",
-    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80",
-  },
+const traditionalMenu = [
+  { title: "Zacahuil", sub: "Rey de los tamales", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80" },
+  { title: "Mole Papanteco", sub: "Sabor ancestral", img: "https://images.unsplash.com/photo-1547928576-a4a332171b91?auto=format&fit=crop&q=80" },
+  { title: "Bocoles", sub: "Maíz y Tradición", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80" },
+  { title: "Beso Papanteco", sub: "Dulce herencia", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&q=80" },
+  { title: "Atole Morado", sub: "Bebida sagrada", img: "https://images.unsplash.com/photo-1544145945-f904253db0ad?auto=format&fit=crop&q=80" },
 ];
 
 export default function SaborPage() {
@@ -31,57 +20,54 @@ export default function SaborPage() {
           <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
             <Utensils className="w-6 h-6" />
           </div>
-          <h1 className="text-3xl font-black tracking-tighter text-foreground">Sabor Papanteco</h1>
+          <h1 className="text-3xl font-black tracking-tighter text-foreground">Sabor</h1>
         </div>
         <p className="text-gray-400 font-medium tracking-tight">
-          Descubre los secretos culinarios de la ciudad que perfuma al mundo.
+          Gastronomía Totonaca: El perfume de la vainilla en cada bocado.
         </p>
-
-        <SegmentedControl options={["Sabores Tradicionales", "Restaurantes"]} />
       </header>
 
+      {/* DEMO SECTION */}
       <section className="px-6 flex flex-col gap-6">
-        <h2 className="text-lg font-bold tracking-tight">Vitrina Gastronómica</h2>
-        <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 no-scrollbar">
-          {traditionalDishes.map((dish, i) => (
-            <div key={i} className="min-w-[240px]">
-              <iOSCard {...dish} />
+        <h2 className="text-lg font-bold tracking-tight">Tradición de Papantla</h2>
+        <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 no-scrollbar snap-x">
+          {traditionalMenu.map((dish, i) => (
+            <div key={i} className="min-w-[220px] snap-start">
+              <iOSCard title={dish.title} subtitle={dish.sub} imageUrl={dish.img} />
             </div>
           ))}
         </div>
       </section>
 
-      <section className="px-6 mt-10 flex flex-col gap-6">
-        <h2 className="text-lg font-bold tracking-tight">Recomendados</h2>
-        <div className="flex flex-col gap-4">
-          {[
-            { name: "Restaurante Nakú", type: "Comida Típica", stars: 4.9, dist: '0.2 km' },
-            { name: "El Mural", type: "Casa de Vainilla", stars: 4.7, dist: '0.5 km' },
-            { name: "Café de la Parroquia", type: "Café & Pan", stars: 4.8, dist: '0.8 km' },
-          ].map((rest, i) => (
-            <motion.div
-              key={i}
-              whileTap={{ scale: 0.98 }}
-              className="bg-white/80 dark:bg-white/5 p-4 rounded-3xl border border-black/5 flex items-center gap-4 shadow-sm"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-white/10 flex-shrink-0" />
-              <div className="flex-1 flex flex-col">
-                <h3 className="font-bold text-sm tracking-tight">{rest.name}</h3>
-                <span className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">{rest.type}</span>
-                <div className="flex items-center gap-3 mt-1">
-                   <div className="flex items-center gap-1">
-                      <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
-                      <span className="text-xs font-bold text-gray-900 dark:text-white">{rest.stars}</span>
-                   </div>
-                   <div className="flex items-center gap-1 text-gray-400">
-                      <MapPin className="w-3 h-3" />
-                      <span className="text-xs font-medium">{rest.dist}</span>
-                   </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      {/* ACTION BUTTONS */}
+      <section className="px-6 mt-10 grid grid-cols-1 gap-4">
+          <motion.button 
+             whileTap={{ scale: 0.98 }}
+             className="bg-primary p-6 rounded-4xl flex items-center gap-5 shadow-2xl shadow-primary/20"
+          >
+             <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white">
+                <ChefHat className="w-6 h-6" />
+             </div>
+             <div className="flex flex-col items-start">
+                <span className="text-white font-black text-lg tracking-tight">Sabores Papantecos</span>
+                <span className="text-white/60 text-[10px] uppercase font-bold tracking-widest">Comida Típica Regional</span>
+             </div>
+             <ChevronRight className="ml-auto text-white" />
+          </motion.button>
+
+          <motion.button 
+             whileTap={{ scale: 0.98 }}
+             className="bg-white dark:bg-white/5 p-6 rounded-4xl border border-black/5 flex items-center gap-5 shadow-sm"
+          >
+             <div className="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-white/10 flex items-center justify-center text-primary">
+                <Pizza className="w-6 h-6" />
+             </div>
+             <div className="flex flex-col items-start">
+                <span className="font-black text-lg tracking-tight">Alimentos y bebidas</span>
+                <span className="text-gray-400 text-[10px] uppercase font-bold tracking-widest">Negocios y Restaurantes</span>
+             </div>
+             <ChevronRight className="ml-auto text-gray-300" />
+          </motion.button>
       </section>
     </div>
   );

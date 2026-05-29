@@ -66,14 +66,14 @@ export default function InstallPrompt() {
           </button>
 
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <Download className="w-6 h-6 text-[#F16B24]" />
+            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+               <Download className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="font-bold text-lg text-gray-900">Instala la App</h3>
-              <p className="text-sm text-gray-500 mt-1 leading-snug">
-                Accede rápidamente a la cultura de Papantla instalando nuestra plataforma en tu {isIOS ? 'iPhone' : 'dispositivo'}.
-              </p>
+               <h3 className="font-bold text-lg text-gray-900">Instala la App</h3>
+               <p className="text-sm text-gray-500 mt-1 leading-snug">
+                 Accede rápidamente a la cultura de Papantla instalando nuestra plataforma en tu {isIOS ? 'iPhone' : 'dispositivo'}.
+               </p>
             </div>
           </div>
 
@@ -88,7 +88,7 @@ export default function InstallPrompt() {
             ) : (
               <button
                 onClick={handleInstall}
-                className="w-full bg-[#F16B24] text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 Instalar Ahora

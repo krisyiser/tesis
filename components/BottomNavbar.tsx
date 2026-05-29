@@ -1,14 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Compass, MapPin, Utensils, Calendar, Briefcase } from "lucide-react";
+import { Compass, MapPin, Utensils, Calendar, Briefcase, Bed } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { icon: Compass, label: "Explorar", href: "/" },
+  { icon: Compass, label: "Inicio", href: "/" },
   { icon: MapPin, label: "Destinos", href: "/destinos" },
   { icon: Utensils, label: "Sabor", href: "/sabor" },
+  { icon: Bed, label: "Hospedaje", href: "/hospedaje" },
   { icon: Calendar, label: "Eventos", href: "/eventos" },
   { icon: Briefcase, label: "Servicios", href: "/servicios" },
 ];

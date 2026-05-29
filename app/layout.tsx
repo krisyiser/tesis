@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import BottomNavbar from "@/components/BottomNavbar";
+import SplashScreen from "@/components/SplashScreen";
+import InstallPrompt from "@/components/InstallPrompt";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
