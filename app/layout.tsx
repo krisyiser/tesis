@@ -1,29 +1,28 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import InstallPrompt from "@/components/InstallPrompt";
-import SplashScreen from "@/components/SplashScreen";
+import BottomNavbar from "@/components/BottomNavbar";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Papantla Turismo | La Ciudad que Perfuma",
-  description: "Plataforma digital para la promoción turística de Papantla, Veracruz.",
+  title: "Papantla Turismo | Premium Experience",
+  description: "Descubre la Ciudad que Perfuma con una experiencia móvil de lujo.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
-    title: "Papantla PWA",
+    statusBarStyle: "black-translucent",
+    title: "Papantla",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F16B24",
+  themeColor: "#C05C3E",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -36,12 +35,12 @@ export default function RootLayout({
       <head>
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       </head>
-      <body className={`${outfit.className} bg-white dark:bg-[#121212] text-[#1A1A1A] dark:text-white antialiased transition-colors duration-300 pb-20 md:pb-0`}>
+      <body className={`${outfit.className} bg-background text-foreground antialiased selection:bg-primary/20`}>
         <SplashScreen />
-        <Navbar />
         <main className="min-h-screen">
           {children}
         </main>
+        <BottomNavbar />
         <InstallPrompt />
       </body>
     </html>

@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "#F16B24",
-        secondary: "#FFC107",
+        background: "#FAF9F6",
+        foreground: "#1A1A1A",
+        primary: "#C05C3E",
+        secondary: "#426B50",
       },
       borderRadius: {
         '4xl': '2.5rem',

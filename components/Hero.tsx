@@ -47,6 +47,7 @@ export default function Hero() {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => document.getElementById('explore-content')?.scrollIntoView({ behavior: 'smooth' })}
           className="mt-8 px-10 py-3 rounded-full border border-white/40 bg-white/10 backdrop-blur-md text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-300"
         >
           EXPLORAR MÁS
