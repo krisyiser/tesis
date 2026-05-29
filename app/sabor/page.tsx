@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import iOSCard from "@/components/iOSCard";
+import IOSCard from "@/components/IOSCard";
 import { Utensils, Star, MapPin, ChevronRight, Pizza, ChefHat } from "lucide-react";
 
 const traditionalMenu = [
@@ -33,7 +33,7 @@ export default function SaborPage() {
         <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 no-scrollbar snap-x">
           {traditionalMenu.map((dish, i) => (
             <div key={i} className="min-w-[220px] snap-start">
-              <iOSCard title={dish.title} subtitle={dish.sub} imageUrl={dish.img} />
+              <IOSCard title={dish.title} subtitle={dish.sub} imageUrl={dish.img} />
             </div>
           ))}
         </div>

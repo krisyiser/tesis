@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import iOSCard from "@/components/iOSCard";
+import IOSCard from "@/components/IOSCard";
 import { Bed, Star, MapPin, Coffee, Wifi, Car } from "lucide-react";
 
 export default function HospedajePage() {
@@ -69,7 +69,7 @@ export default function HospedajePage() {
              { title: "Posada Real", sub: "Centro", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" },
            ].map((item, i) => (
              <motion.div key={i} whileTap={{ scale: 0.97 }}>
-                <iOSCard title={item.title} subtitle={item.sub} imageUrl={item.img} />
+                <IOSCard title={item.title} subtitle={item.sub} imageUrl={item.img} />
              </motion.div>
            ))}
         </div>

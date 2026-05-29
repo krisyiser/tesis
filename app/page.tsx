@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Hero from "@/components/Hero";
 import FloatingSearch from "@/components/FloatingSearch";
-import iOSCard from "@/components/iOSCard";
+import IOSCard from "@/components/IOSCard";
 import { ChevronRight, Sparkles, MapPin, Calendar, Utensils, Bed, Briefcase } from "lucide-react";
 import Image from "next/image";
 
@@ -68,14 +68,14 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <motion.div whileTap={{ scale: 0.97 }} className="h-[300px]">
-                    <iOSCard 
+                    <IOSCard 
                        title="Parroquia de la Asunción" 
                        subtitle="Arquitectura Sacra" 
                        imageUrl="https://images.unsplash.com/photo-1548174786-8a30d9515bd1?auto=format&fit=crop&q=80" 
                     />
                 </motion.div>
                 <motion.div whileTap={{ scale: 0.97 }} className="h-[300px]">
-                    <iOSCard 
+                    <IOSCard 
                        title="Zócalo y Quiosco" 
                        subtitle="Vida cotidiana" 
                        imageUrl="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?auto=format&fit=crop&q=80" 

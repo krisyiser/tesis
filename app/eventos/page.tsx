@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import iOSCard from "@/components/iOSCard";
+import IOSCard from "@/components/IOSCard";
 import { Calendar, Bell, ChevronRight, MapPin, Sparkles } from "lucide-react";
 
 const allEvents = [
@@ -44,7 +44,7 @@ export default function EventosPage() {
         <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 no-scrollbar snap-x">
           {featured.map((event, i) => (
             <div key={i} className="min-w-[300px] snap-start">
-              <iOSCard title={event.title} subtitle={event.date} imageUrl={event.img} />
+              <IOSCard title={event.title} subtitle={event.date} imageUrl={event.img} />
             </div>
           ))}
         </div>

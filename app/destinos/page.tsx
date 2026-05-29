@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import iOSCard from "@/components/iOSCard";
+import IOSCard from "@/components/IOSCard";
 import { MapPin, Search } from "lucide-react";
 
 const destinations = [
@@ -70,7 +70,7 @@ export default function DestinosPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
           >
-            <iOSCard {...dest} />
+            <IOSCard {...dest} />
           </motion.div>
         ))}
       </div>

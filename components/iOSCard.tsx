@@ -3,14 +3,14 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-interface iOSCardProps {
+interface IOSCardProps {
   title: string;
   subtitle?: string;
   imageUrl: string;
   className?: string;
 }
 
-export default function iOSCard({ title, subtitle, imageUrl, className = "" }: iOSCardProps) {
+export default function IOSCard({ title, subtitle, imageUrl, className = "" }: IOSCardProps) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
