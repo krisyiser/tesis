@@ -140,8 +140,8 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between py-1 group"
                 >
-                  {/* Minimalist font weight and tracking */}
-                  <span className={`text-5xl font-light tracking-tighter transition-all ${pathname === item.path ? "text-primary font-medium" : "text-foreground group-hover:text-primary"}`}>
+                  {/* Minimalist font weight and tracking with Inter font */}
+                  <span className={`text-5xl font-light tracking-tighter font-inter transition-all ${pathname === item.path ? "text-primary font-medium" : "text-foreground group-hover:text-primary"}`}>
                     {item.name}
                   </span>
                   <ChevronRight className={`w-6 h-6 ${pathname === item.path ? "text-primary" : "text-foreground/10"}`} />
