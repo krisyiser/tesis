@@ -14,6 +14,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 
+  const isHome = pathname === "/";
+
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -21,9 +23,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Determine if the navbar should show "dark content" (over white bg) or "light content" (over hero bg)
+  // On home, it depends on scroll. On other pages, it's always "scrolled" style because bg is white.
+  const isScrolledStyle = scrolled || !isHome;
+
   const navItemClass = (path: string) => `
     text-[10px] font-black uppercase tracking-[0.2em] transition-all relative group
-    ${pathname === path ? "text-primary" : scrolled ? "text-black dark:text-white" : "text-white"}
+    ${pathname === path ? "text-primary" : isScrolledStyle ? "text-black dark:text-white" : "text-white"}
     hover:text-primary dark:hover:text-primary
   `;
 
@@ -32,7 +38,7 @@ export default function Navbar() {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ${
-        scrolled 
+        isScrolledStyle 
           ? "bg-white/80 dark:bg-black/80 backdrop-blur-3xl py-4 shadow-2xl border-b border-black/5 dark:border-white/5" 
           : "bg-transparent py-8"
       }`}
@@ -51,10 +57,10 @@ export default function Navbar() {
         <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 flex flex-col items-center">
             <Link href="/" className="flex flex-col items-center group">
                 <motion.div 
-                    animate={scrolled ? { scale: 0.8 } : { scale: 1 }}
+                    animate={isScrolledStyle ? { scale: 0.8 } : { scale: 1 }}
                     className="flex flex-col items-center"
                 >
-                    <span className={`text-2xl md:text-3xl font-black tracking-[0.2em] leading-none text-center transition-colors duration-500 ${scrolled ? "text-black dark:text-white" : "text-white"}`}>PAPANTLA</span>
+                    <span className={`text-2xl md:text-3xl font-black tracking-[0.2em] leading-none text-center transition-colors duration-500 ${isScrolledStyle ? "text-black dark:text-white" : "text-white"}`}>PAPANTLA</span>
                     <div className="flex items-center gap-2 mt-1">
                     <div className="h-[1px] w-4 bg-primary/40" />
                     <span className="text-[6px] md:text-[7px] font-bold text-primary uppercase tracking-[0.4em] leading-none whitespace-nowrap italic">La Ciudad que Perfuma</span>
@@ -73,7 +79,7 @@ export default function Navbar() {
           <div className="h-4 w-[1px] bg-white/10 mx-2" />
           
           <div className="flex items-center gap-4">
-            <button className={`${scrolled ? "text-black dark:text-white" : "text-white"} text-[10px] font-black uppercase tracking-widest flex items-center gap-1 hover:text-primary transition-colors`}>
+            <button className={`${isScrolledStyle ? "text-black dark:text-white" : "text-white"} text-[10px] font-black uppercase tracking-widest flex items-center gap-1 hover:text-primary transition-colors`}>
               ES <ChevronDown className="w-3 h-3" />
             </button>
             <button 
@@ -92,13 +98,13 @@ export default function Navbar() {
         <div className="flex lg:hidden items-center gap-2">
             <button 
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className={`p-2.5 rounded-full ${scrolled ? "text-black bg-black/5" : "text-white bg-white/10"} dark:bg-white/10`}
+                className={`p-2.5 rounded-full ${isScrolledStyle ? "text-black bg-black/5 dark:text-white dark:bg-white/5" : "text-white bg-white/10"} dark:bg-white/10`}
             >
                 {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className={`p-2.5 rounded-full ${scrolled ? "text-black bg-black/5" : "text-white bg-white/10"} dark:bg-white/10`}
+                className={`p-2.5 rounded-full ${isScrolledStyle ? "text-black bg-black/5 dark:text-white dark:bg-white/5" : "text-white bg-white/10"} dark:bg-white/10`}
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
