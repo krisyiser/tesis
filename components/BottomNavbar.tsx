@@ -17,20 +17,20 @@ export default function BottomNavbar() {
 
   return (
     <div className="fixed bottom-6 left-6 right-6 z-50 md:hidden">
-      <div className="bg-black/90 backdrop-blur-2xl rounded-full px-6 py-3 flex items-center justify-between shadow-2xl border border-white/10">
+      <div className="bg-white/80 dark:bg-black/90 backdrop-blur-3xl rounded-full px-6 py-4 flex items-center justify-between shadow-2xl border border-black/5 dark:border-white/10 transition-colors duration-500">
         {items.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.path;
           return (
-            <Link key={item.path} href={item.path} className="relative flex flex-col items-center gap-1">
-              <div className={`p-2 rounded-xl transition-all ${isActive ? "text-primary scale-110" : "text-gray-400"}`}>
-                <Icon className="w-6 h-6" />
+            <Link key={item.path} href={item.path} className="relative flex flex-col items-center gap-1 group">
+              <div className={`p-2 rounded-xl transition-all duration-300 ${isActive ? "text-primary scale-125" : "text-black/40 dark:text-white/40 group-hover:text-primary"}`}>
+                <Icon className="w-5 h-5" />
               </div>
-              <span className={`text-[8px] font-bold uppercase tracking-tighter ${isActive ? "text-primary" : "text-gray-500"}`}>
+              <span className={`text-[7px] font-black uppercase tracking-[0.1em] ${isActive ? "text-primary" : "text-black/30 dark:text-white/30"}`}>
                 {item.name}
               </span>
               {isActive && (
-                <div className="absolute -top-1 left-1.2 w-1 h-1 bg-primary rounded-full shadow-[0_0_8px_rgba(var(--primary-rgb),0.8)]" />
+                <div className="absolute -top-1 w-1 h-1 bg-primary rounded-full shadow-[0_0_10px_#8B2635]" />
               )}
             </Link>
           );
