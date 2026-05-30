@@ -3,15 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 26, 26, 26;
-  --background-start-rgb: 248, 248, 248;
-  --background-end-rgb: 248, 248, 248;
+  --primary: #8B2635; /* Tierra/Cultura Papanteca */
+  --primary-rgb: 139, 38, 53;
+  --background: #ffffff;
+  --foreground: #1a1a1a;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
-  min-height: 100dvh;
+[class~="dark"] {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground transition-colors duration-500;
+  }
 }
 
 @layer utilities {
@@ -25,6 +31,9 @@ body {
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
+  .text-shadow-premium {
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
 }
 
 .glass {
@@ -34,30 +43,17 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+.dark .glass {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .tap-highlight-none {
   -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-.snap-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  height: 100vh;
-}
-
-.snap-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-.glass-dark {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @keyframes float {

@@ -6,6 +6,7 @@ import BottomNavbar from "@/components/BottomNavbar";
 import SplashScreen from "@/components/SplashScreen";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import InstallPrompt from "@/components/InstallPrompt";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -31,13 +32,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} ${outfit.variable} antialiased selection:bg-primary selection:text-white`}>
-        <SplashScreen />
-        <Navbar />
-        <main>{children}</main>
-        <BottomNavbar />
-        <ServiceWorkerRegistration />
-        <InstallPrompt />
+      <body className={`${inter.variable} ${outfit.variable} antialiased selection:bg-primary selection:text-white bg-white dark:bg-black`}>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+            <SplashScreen />
+            <Navbar />
+            <main>{children}</main>
+            <BottomNavbar />
+            <ServiceWorkerRegistration />
+            <InstallPrompt />
+        </ThemeProvider>
       </body>
     </html>
   );

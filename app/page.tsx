@@ -1,21 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronRight, Sparkles, MapPin, ArrowDown } from "lucide-react";
+import { ChevronRight, Sparkles, MapPin, ArrowDown, Landmark, Info } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-const destinations = [
+const exploreItems = [
   {
-    title: "El Tajín",
-    subtitle: "Ciudad Sagrada",
-    desc: "Testigo monumental de la cultura Totonaca, famosa por su Pirámide de los Nichos y su energía ancestral.",
-    img: "https://images.unsplash.com/photo-1627997092120-d66a6ef413d7?auto=format&fit=crop&q=80",
+    title: "Zona Arqueológica del Tajín",
+    subtitle: "Ciudad Trueno",
+    desc: "Capital del imperio Totonaca, famosa por su Pirámide de los Nichos.",
+    img: "/tajin.jpg",
   },
   {
-    title: "Corazón Histórico",
-    subtitle: "Cultura Viva",
-    desc: "Camina por calles que huelen a vainilla, admira la Parroquia de la Asunción y la hospitalidad de su gente.",
-    img: "https://images.unsplash.com/photo-1548174786-8a30d9515bd1?auto=format&fit=crop&q=80",
+    title: "Centro Histórico",
+    subtitle: "Corazón del Pueblo",
+    desc: "Arquitectura vernácula y el aroma de la vainilla en cada esquina.",
+    img: "/centro.jpg",
+  },
+  {
+    title: "Monumento al Volador",
+    subtitle: "Símbolo de Papantla",
+    desc: "Homenaje al ritual ancestral que desafía las alturas.",
+    img: "/volador.jpg",
+  },
+  {
+    title: "Mural a la Cultura Totonaca",
+    subtitle: "Historia en Piedra",
+    desc: "La cosmogonía de un pueblo grabada para la eternidad.",
+    img: "/mural.jpg",
   },
 ];
 
@@ -23,22 +36,21 @@ export default function Home() {
   const imgBPath = "/hero-b-background.jpg";
 
   return (
-    <div className="flex flex-col bg-background">
-      {/* HERO SECTION - IMAGE A DESIGN */}
+    <div className="flex flex-col bg-white dark:bg-black transition-colors duration-500">
+      
+      {/* SECTION 1: HERO */}
       <section className="relative h-[100dvh] w-full overflow-hidden flex flex-col items-center justify-center text-center">
-         {/* BACKGROUND (Image B) */}
          <div className="absolute inset-0 z-0">
             <img 
                src={imgBPath} 
                alt="Papantla Hero" 
                className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
          </div>
 
-         {/* CONTENT (Image A layout) */}
-         <div className="relative z-10 flex flex-col items-center">
+         <div className="relative z-10 flex flex-col items-center px-6">
             <motion.div
                initial={{ opacity: 0, y: 30 }}
                animate={{ opacity: 1, y: 0 }}
@@ -51,35 +63,29 @@ export default function Home() {
                   <div className="h-[1px] w-8 bg-white/40" />
                </div>
 
-               <h1 className="text-8xl md:text-[12rem] font-black text-white leading-[0.8] tracking-tight">
+               {/* SIZE ADJUSTED FOR MOBILE: text-6xl for mobile, text-[12rem] for desktop */}
+               <h1 className="text-6xl md:text-8xl lg:text-[12rem] font-black text-white leading-[0.8] tracking-tighter">
                   PAPANTLA
                </h1>
 
                <div className="flex items-center gap-4 mt-8">
                   <div className="w-2 h-2 bg-primary rotate-45" />
-                  <span className="text-white text-lg md:text-2xl font-black uppercase tracking-widest italic drop-shadow-2xl">
+                  <span className="text-white text-md md:text-2xl font-black uppercase tracking-widest italic drop-shadow-2xl">
                      LA CIUDAD QUE PERFUMA
                   </span>
                   <div className="w-2 h-2 bg-primary rotate-45" />
                </div>
 
-               <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="mt-16 px-12 py-4 rounded-full border border-white/40 bg-white/10 backdrop-blur-md text-white font-black text-[10px] uppercase tracking-[0.3em] transition-all hover:bg-white/20"
-               >
-                  Explorar Más
-               </motion.button>
+               <Link href="#explore" scroll={true}>
+                    <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="mt-16 px-12 py-4 rounded-full border border-white/40 bg-white/10 backdrop-blur-md text-white font-black text-[10px] uppercase tracking-[0.3em] transition-all hover:bg-white/20"
+                    >
+                    Explorar Más
+                    </motion.button>
+               </Link>
             </motion.div>
-         </div>
-
-         {/* VERTICAL DOTS (A style) */}
-         <div className="absolute right-6 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-6 items-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-full py-6 px-3 flex flex-col gap-4 border border-white/5">
-               {['I', 'F', 'T', 'Y'].map((l) => (
-                  <span key={l} className="text-white/60 text-[10px] font-black hover:text-primary cursor-pointer transition-colors px-2">{l}</span>
-               ))}
-            </div>
          </div>
 
          <div className="absolute bottom-10 animate-bounce opacity-40">
@@ -87,53 +93,98 @@ export default function Home() {
          </div>
       </section>
 
-      {/* ADDITIONAL SECTIONS (Vertical Scrolling) */}
-      {destinations.map((section, i) => (
-        <section key={i} className="relative h-screen w-full overflow-hidden flex items-center">
-            <div className="absolute inset-0 z-0">
-                <Image 
-                  src={section.img} 
-                  alt={section.title} 
-                  fill 
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
-            </div>
-
-            <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
-                <motion.div
-                   initial={{ opacity: 0, x: -50 }}
-                   whileInView={{ opacity: 1, x: 0 }}
-                   transition={{ duration: 0.8 }}
-                   className="flex flex-col gap-4 max-w-2xl"
-                >
-                   <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9]">
-                      {section.title}
-                   </h2>
-                   <p className="text-white/70 text-lg md:text-xl font-medium leading-relaxed max-w-lg mt-4">
-                      {section.desc}
-                   </p>
-                </motion.div>
-            </div>
-        </section>
-      ))}
-
-      {/* FOOTER-ISH SECTION */}
-      <section className="bg-white dark:bg-black py-32 px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-             <div className="flex flex-col gap-8">
-                 <h3 className="text-4xl font-black tracking-tight text-foreground italic">Historia & <span className="text-primary not-italic">Cultura</span></h3>
-                 <p className="text-gray-500 text-xl font-medium leading-relaxed">
-                    Papantla no es solo un destino, es un viaje en el tiempo. Desde el aroma de la vainilla que perfuma nuestras plazas hasta el estruendo de los tambores de los Voladores.
-                 </p>
+      {/* SECTION 2: EXPLORAR MÁS */}
+      <section id="explore" className="py-32 px-6 bg-gray-50 dark:bg-[#050505]">
+          <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
+             <div className="flex flex-col items-center text-center gap-4">
+                <Sparkles className="text-primary w-8 h-8" />
+                <h2 className="text-5xl md:text-7xl font-black text-black dark:text-white tracking-tighter italic">
+                   Explorar <span className="text-primary not-italic">Más</span>
+                </h2>
+                <div className="h-[2px] w-24 bg-primary/20" />
              </div>
-             <div className="relative rounded-[60px] overflow-hidden aspect-square border-8 border-gray-50 dark:border-white/5 shadow-2xl">
-                <Image 
-                   src="https://images.unsplash.com/photo-1626081498877-c93d8e57eeff?auto=format&fit=crop&q=80" 
-                   alt="Cultura" 
-                   fill 
-                   className="object-cover"
-                />
+
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                 {exploreItems.map((item, i) => (
+                    <motion.div
+                       key={i}
+                       initial={{ opacity: 0, scale: 0.9 }}
+                       whileInView={{ opacity: 1, scale: 1 }}
+                       viewport={{ once: true }}
+                       transition={{ delay: i * 0.1 }}
+                       className="group relative h-[500px] rounded-[50px] overflow-hidden shadow-2xl"
+                    >
+                        <Image 
+                           src={item.img} 
+                           alt={item.title} 
+                           fill 
+                           className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+                        <div className="absolute bottom-12 left-10 right-10">
+                           <span className="text-primary font-black uppercase text-[10px] tracking-[0.3em] mb-4 block">
+                              {item.subtitle}
+                           </span>
+                           <h3 className="text-4xl font-black text-white leading-none tracking-tight mb-4">
+                              {item.title}
+                           </h3>
+                           <p className="text-white/60 text-sm font-medium leading-relaxed max-w-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                              {item.desc}
+                           </p>
+                           <button className="flex items-center gap-3 text-white font-black text-[10px] uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full hover:bg-primary transition-all">
+                              Ver Detalle <ChevronRight className="w-4 h-4" />
+                           </button>
+                        </div>
+                    </motion.div>
+                 ))}
+             </div>
+          </div>
+      </section>
+
+      {/* SECTION 3: HISTORIA Y CULTURA */}
+      <section className="py-32 px-6 bg-white dark:bg-black">
+          <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                 <div className="flex flex-col gap-10">
+                     <div className="flex flex-col gap-4">
+                        <Landmark className="text-primary w-10 h-10" />
+                        <h3 className="text-5xl md:text-6xl font-black tracking-tight text-black dark:text-white italic">
+                            Historia & <span className="text-primary not-italic">Cultura</span>
+                        </h3>
+                     </div>
+                     <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
+                        Papantla es un crisol de tradiciones milenarias. Descubre los recintos que resguardan el legado Totonaca y el arte que nace de la tierra.
+                     </p>
+                     
+                     {/* MUSEUM BANNER */}
+                     <motion.div 
+                        whileHover={{ y: -10 }}
+                        className="bg-gray-100 dark:bg-white/5 p-8 rounded-[40px] border border-black/5 dark:border-white/5 flex flex-col gap-6"
+                     >
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
+                               <Info className="w-6 h-6" />
+                            </div>
+                            <h4 className="text-2xl font-black text-black dark:text-white tracking-tight">Museo Teodoro Cano</h4>
+                        </div>
+                        <p className="text-gray-500 text-sm leading-relaxed">
+                            Resguarda la obra monumental del maestro Teodoro Cano, capturando la esencia espiritual y cotidiana de la cultura Totonaca.
+                        </p>
+                        <button className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl hover:bg-primary dark:hover:bg-primary hover:text-white transition-all shadow-lg">
+                            Página de Información
+                        </button>
+                     </motion.div>
+                 </div>
+                 
+                 <div className="relative rounded-[80px] overflow-hidden aspect-[4/5] border-8 border-gray-100 dark:border-white/5 shadow-3xl">
+                    <Image 
+                       src="https://images.unsplash.com/photo-1626081498877-c93d8e57eeff?auto=format&fit=crop&q=80" 
+                       alt="Cultura Papantla" 
+                       fill 
+                       className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                 </div>
              </div>
           </div>
       </section>
