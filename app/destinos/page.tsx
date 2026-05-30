@@ -1,128 +1,136 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Info, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { MapPin, Search, ChevronRight, Star, Compass } from "lucide-react";
+import Link from "next/link";
 
-const destinos = [
+const destinations = [
   {
     title: "Zona Arqueológica El Tajín",
-    location: "Papantla, Veracruz",
-    desc: "Capital del imperio Totonaca y Patrimonio de la Humanidad. Famosa por la impresionante Pirámide de los Nichos y sus magníficos juegos de pelota.",
-    image: "/destinos/tajin.jpg",
-    tags: ["Patrimonio UNESCO", "Historia", "Cultura"],
+    subtitle: "Ciudad Trueno - Patrimonio UNESCO",
+    imageUrl: "/destinos/tajin.jpg",
+    rating: 4.9,
+    category: "Arqueología",
   },
   {
-    title: "Centro Histórico",
-    location: "Corazón de Papantla",
-    desc: "Pueblo Mágico con aroma a vainilla. Sus calles empedradas y arquitectura vernácula invitan a descubrir la esencia de la ciudad que perfuma al mundo.",
-    image: "/destinos/centro.jpg",
-    tags: ["Pueblo Mágico", "Arquitectura", "Vainilla"],
+    title: "Centro Histórico de Papantla",
+    subtitle: "Corazón del Pueblo Mágico",
+    imageUrl: "/destinos/centro.jpg",
+    rating: 4.8,
+    category: "Cultura",
   },
   {
     title: "Mural de la Cultura Totonaca",
-    location: "Palacio Municipal",
-    desc: "Obra maestra del maestro Teodoro Cano que narra la cosmogonía, tradiciones y el devenir histórico del pueblo totonaca en bajorrelieve.",
-    image: "/destinos/mural.jpg",
-    tags: ["Arte", "Relieve", "Identidad"],
+    subtitle: "Historia Tallada en Piedra",
+    imageUrl: "/destinos/mural.jpg",
+    rating: 4.7,
+    category: "Arte",
   },
   {
     title: "Monumento al Volador",
-    location: "Mirador Cerreño",
-    desc: "Homenaje al Ritual Ancestral de los Hombres Pájaro. Desde este mirador se contempla el valle de Papantla en toda su majestuosidad.",
-    image: "/destinos/volador.jpg",
-    tags: ["Ritual", "Vistas Panorámicas", "Icono"],
+    subtitle: "Mirador del Ritual Ancestral",
+    imageUrl: "/destinos/volador.jpg",
+    rating: 4.9,
+    category: "Mirador",
   },
   {
     title: "Zona Arqueológica Coyuxquihui",
-    location: "Región Totonaca",
-    desc: "Impresionante sitio arqueológico donde la selva abraza la arquitectura prehispánica. Destaca por su ubicación estratégica y sus terrazas talladas.",
-    image: "/destinos/coyuxquihui.jpg",
-    tags: ["Aventura", "Naturaleza", "Exploración"],
+    subtitle: "Ruinas en la Selva Totonaca",
+    imageUrl: "/destinos/coyuxquihui.jpg",
+    rating: 4.6,
+    category: "Arqueología",
+  },
+  {
+    title: "Rancho Playa",
+    subtitle: "Paraíso de la Costa Esmeralda",
+    imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80",
+    rating: 4.8,
+    category: "Playa",
+  },
+  {
+    title: "Playa la Bocana",
+    subtitle: "Naturaleza Virgen y Serenidad",
+    imageUrl: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80",
+    rating: 4.7,
+    category: "Playa",
   },
 ];
 
-export default function Destinos() {
+export default function DestinosPage() {
   return (
-    <div className="min-h-screen bg-transparent dark:bg-black transition-colors duration-500 pt-32 pb-20 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col gap-16">
-        
-        <header className="flex flex-col gap-4">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 text-primary font-black uppercase text-[10px] tracking-[0.4em]"
-          >
-             <div className="h-[2px] w-8 bg-primary/20" />
-             Catálogo
-          </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter"
-          >
-            Destinos <span className="text-primary italic">Recomendados</span>
-          </motion.h1>
-          <p className="text-gray-600 dark:text-gray-400 max-w-xl text-lg font-medium">
-            Sigue la ruta de la vainilla y descubre sitios arqueológicos, arte monumental y tradiciones vivas.
-          </p>
-        </header>
-
-        <div className="flex flex-col gap-12">
-          {destinos.map((dest, i) => (
-            <motion.div
-              key={dest.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative flex flex-col lg:flex-row bg-white dark:bg-white/5 rounded-[50px] md:rounded-[70px] overflow-hidden border border-black/5 dark:border-white/5 shadow-[0_30px_100px_-30px_rgba(0,0,0,0.1)] dark:shadow-none hover:shadow-primary/10 transition-all duration-700"
-            >
-              <div className="relative w-full lg:w-2/5 h-[350px] lg:h-auto overflow-hidden">
-                <Image
-                  src={dest.image}
-                  alt={dest.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden" />
+    <div className="pb-32 flex flex-col bg-background min-h-screen">
+      <header className="px-6 pt-32 pb-12 flex flex-col gap-6">
+        <div className="flex items-center justify-between">
+           <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3 mb-2">
+                 <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Compass className="w-5 h-5" />
+                 </div>
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Explorar</span>
               </div>
-
-              <div className="flex-1 p-10 lg:p-16 flex flex-col justify-center gap-6">
-                <div className="flex items-center gap-3">
-                   <div className="flex items-center gap-2 text-primary font-black uppercase text-[9px] tracking-widest bg-primary/10 px-4 py-2 rounded-full">
-                      <MapPin className="w-3 h-3" /> {dest.location}
-                   </div>
-                   <div className="hidden md:flex gap-2">
-                       {dest.tags.map(tag => (
-                         <span key={tag} className="text-[8px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest px-3 py-1 border border-black/5 dark:border-white/5 rounded-full">
-                           {tag}
-                         </span>
-                       ))}
-                   </div>
-                </div>
-                
-                <h2 className="text-4xl md:text-6xl font-black text-black dark:text-white tracking-tight leading-none group-hover:text-primary transition-colors">
-                  {dest.title}
-                </h2>
-                
-                <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-2xl font-medium">
-                  {dest.desc}
-                </p>
-
-                <div className="mt-6 flex flex-wrap items-center gap-6">
-                  <button className="flex items-center gap-3 bg-black dark:bg-white text-white dark:text-black px-10 py-5 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-primary transition-all shadow-xl hover:-translate-y-1">
-                    Explorar Destino <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <button className="flex items-center gap-2 text-black/40 dark:text-white/40 font-black text-[9px] uppercase tracking-widest hover:text-primary transition-colors">
-                    <Info className="w-4 h-4" /> Más Información
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-foreground italic">
+                Destinos <span className="not-italic text-primary">Inolvidables</span>
+              </h1>
+           </div>
         </div>
+
+        <div className="relative mt-4">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Buscar por nombre o categoría..."
+            className="w-full bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-[30px] py-5 pl-14 pr-6 text-sm font-bold focus:ring-4 focus:ring-primary/10 outline-none transition-all shadow-sm"
+          />
+        </div>
+      </header>
+
+      <div className="px-6 flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-1">
+        {destinations.map((dest, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: i * 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            className="group relative flex flex-col lg:flex-row bg-white dark:bg-black/40 rounded-[50px] overflow-hidden border border-black/5 dark:border-white/5 shadow-2xl transition-all duration-500"
+          >
+             {/* Thumbnail */}
+             <div className="h-64 lg:w-[450px] lg:h-auto relative overflow-hidden">
+                <img 
+                   src={dest.imageUrl} 
+                   alt={dest.title} 
+                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                <div className="absolute top-6 left-6 flex items-center gap-2">
+                    <div className="bg-white/90 dark:bg-black/80 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-2 shadow-lg">
+                       <Star className="w-3 h-3 fill-primary text-primary" />
+                       <span className="text-[11px] font-black">{dest.rating}</span>
+                    </div>
+                    <div className="bg-primary/90 backdrop-blur-md px-4 py-2 rounded-2xl text-white text-[9px] font-black uppercase tracking-widest shadow-lg">
+                       {dest.category}
+                    </div>
+                </div>
+             </div>
+             
+             {/* Info */}
+             <div className="p-10 flex flex-col justify-center flex-1">
+                <span className="text-primary font-black uppercase text-[9px] tracking-[0.4em] mb-4 block">{dest.subtitle}</span>
+                <h3 className="text-3xl md:text-4xl font-black text-foreground tracking-tighter leading-none mb-6">
+                   {dest.title}
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-relaxed mb-10 max-w-xl">
+                   Sumérgete en la esencia de Papantla. Este destino ofrece una experiencia única de {dest.category.toLowerCase()} que te conectará con las raíces Totonacas.
+                </p>
+                <div className="flex items-center justify-between mt-auto">
+                   <button className="flex items-center gap-4 bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-3xl font-black text-[10px] uppercase tracking-widest hover:bg-primary dark:hover:bg-primary hover:text-white transition-all shadow-xl">
+                      Descubrir Más <ChevronRight className="w-4 h-4" />
+                   </button>
+                </div>
+             </div>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
