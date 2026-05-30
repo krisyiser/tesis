@@ -15,7 +15,7 @@ const traditionalMenu = [
 export default function SaborPage() {
   return (
     <div className="pb-32 flex flex-col bg-background min-h-screen">
-      <header className="px-6 pt-20 pb-10 flex flex-col gap-4">
+      <header className="px-6 pt-32 pb-10 flex flex-col gap-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
             <Utensils className="w-6 h-6" />

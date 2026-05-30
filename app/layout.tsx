@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import BottomNavbar from "@/components/BottomNavbar";
+import Navbar from "@/components/Navbar";
 import SplashScreen from "@/components/SplashScreen";
 import InstallPrompt from "@/components/InstallPrompt";
 
@@ -39,10 +39,10 @@ export default function RootLayout({
       </head>
       <body className={`${outfit.className} bg-background text-foreground antialiased selection:bg-primary/20`}>
         <SplashScreen />
-        <main className="min-h-screen">
+        <Navbar />
+        <main>
           {children}
         </main>
-        <BottomNavbar />
         <InstallPrompt />
       </body>
     </html>
