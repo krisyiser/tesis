@@ -96,14 +96,6 @@ export default function Home() {
       {/* SECTION 2: EXPLORAR MÁS */}
       <section id="explore" className="py-32 px-6 bg-gray-50 dark:bg-[#050505]">
           <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
-             <div className="flex flex-col items-center text-center gap-4">
-                <Sparkles className="text-primary w-8 h-8" />
-                <h2 className="text-5xl md:text-7xl font-black text-black dark:text-white tracking-tighter italic">
-                   Explorar <span className="text-primary not-italic">Más</span>
-                </h2>
-                <div className="h-[2px] w-24 bg-primary/20" />
-             </div>
-
              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                  {exploreItems.map((item, i) => (
                     <motion.div
@@ -152,7 +144,7 @@ export default function Home() {
                             Historia & <span className="text-primary not-italic">Cultura</span>
                         </h3>
                      </div>
-                     <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
+                     <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
                         Papantla es un crisol de tradiciones milenarias. Descubre los recintos que resguardan el legado Totonaca y el arte que nace de la tierra.
                      </p>
                      
@@ -163,11 +155,11 @@ export default function Home() {
                      >
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
-                               <Info className="w-6 h-6" />
+                               <Landmark className="w-6 h-6" />
                             </div>
                             <h4 className="text-2xl font-black text-black dark:text-white tracking-tight">Museo Teodoro Cano</h4>
                         </div>
-                        <p className="text-gray-500 text-sm leading-relaxed">
+                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                             Resguarda la obra monumental del maestro Teodoro Cano, capturando la esencia espiritual y cotidiana de la cultura Totonaca.
                         </p>
                         <button className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl hover:bg-primary dark:hover:bg-primary hover:text-white transition-all shadow-lg">

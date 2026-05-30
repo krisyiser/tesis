@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, User, Map as MapIcon, ChevronDown } from "lucide-react";
+import { Menu, X, Sun, Moon, User, Map as MapIcon, ChevronDown, Sparkles, ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
@@ -14,7 +14,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 
-  // Avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -24,22 +23,23 @@ export default function Navbar() {
 
   const navItemClass = (path: string) => `
     text-[10px] font-black uppercase tracking-[0.2em] transition-all relative group
-    ${pathname === path ? "text-primary" : "text-white dark:text-white/80 hover:text-primary dark:hover:text-primary"}
+    ${pathname === path ? "text-primary" : scrolled ? "text-black dark:text-white" : "text-white"}
+    hover:text-primary dark:hover:text-primary
   `;
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        scrolled ? "bg-white/80 dark:bg-black/95 backdrop-blur-xl py-4 shadow-2xl border-b border-black/5 dark:border-white/5" : "bg-transparent py-8"
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ${
+        scrolled 
+          ? "bg-white/80 dark:bg-black/80 backdrop-blur-3xl py-4 shadow-2xl border-b border-black/5 dark:border-white/5" 
+          : "bg-transparent py-8"
       }`}
     >
-      <div className="max-w-[1600px] mx-auto px-8 flex items-center justify-between">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between relative">
         
-        {/* LEFT NAV items */}
+        {/* LEFT NAV items (Desktop) */}
         <div className="hidden lg:flex items-center gap-8 flex-1">
           <Link href="/" className={navItemClass("/")}>Inicio</Link>
           <Link href="/destinos" className={navItemClass("/destinos")}>Destinos</Link>
@@ -47,22 +47,24 @@ export default function Navbar() {
           <Link href="/sabor" className={navItemClass("/sabor")}>Sabor</Link>
         </div>
 
-        {/* CENTER LOGO */}
-        <Link href="/" className="flex flex-col items-center px-10 group">
-          <motion.div 
-            animate={scrolled ? { scale: 0.8 } : { scale: 1 }}
-            className="flex flex-col items-center"
-          >
-            <span className={`text-3xl font-black tracking-[0.2em] leading-none text-center ${scrolled ? "text-black dark:text-white" : "text-white"}`}>PAPANTLA</span>
-            <div className="flex items-center gap-2 mt-1">
-               <div className="h-[1px] w-4 bg-primary/40" />
-               <span className="text-[7px] font-bold text-primary uppercase tracking-[0.4em] leading-none whitespace-nowrap">La Ciudad que Perfuma</span>
-               <div className="h-[1px] w-4 bg-primary/40" />
-            </div>
-          </motion.div>
-        </Link>
+        {/* CENTER LOGO - Absolute centered for accuracy */}
+        <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 flex flex-col items-center">
+            <Link href="/" className="flex flex-col items-center group">
+                <motion.div 
+                    animate={scrolled ? { scale: 0.8 } : { scale: 1 }}
+                    className="flex flex-col items-center"
+                >
+                    <span className={`text-2xl md:text-3xl font-black tracking-[0.2em] leading-none text-center transition-colors duration-500 ${scrolled ? "text-black dark:text-white" : "text-white"}`}>PAPANTLA</span>
+                    <div className="flex items-center gap-2 mt-1">
+                    <div className="h-[1px] w-4 bg-primary/40" />
+                    <span className="text-[6px] md:text-[7px] font-bold text-primary uppercase tracking-[0.4em] leading-none whitespace-nowrap italic">La Ciudad que Perfuma</span>
+                    <div className="h-[1px] w-4 bg-primary/40" />
+                    </div>
+                </motion.div>
+            </Link>
+        </div>
 
-        {/* RIGHT NAV items */}
+        {/* RIGHT NAV items (Desktop) */}
         <div className="hidden lg:flex items-center justify-end gap-8 flex-1">
           <Link href="/hospedaje" className={navItemClass("/hospedaje")}>Hospedaje</Link>
           <Link href="/servicios" className={navItemClass("/servicios")}>Servicios</Link>
@@ -70,58 +72,83 @@ export default function Navbar() {
           
           <div className="h-4 w-[1px] bg-white/10 mx-2" />
           
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4">
             <button className={`${scrolled ? "text-black dark:text-white" : "text-white"} text-[10px] font-black uppercase tracking-widest flex items-center gap-1 hover:text-primary transition-colors`}>
               ES <ChevronDown className="w-3 h-3" />
             </button>
             <button 
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className={`${scrolled ? "text-black/60 dark:text-white/60" : "text-white/60"} hover:text-primary transition-all hover:scale-110`}
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-black/5 dark:bg-white/5 hover:bg-primary hover:text-white transition-all text-foreground"
             >
                 {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <button className={`${scrolled ? "text-black/60 dark:text-white/60" : "text-white/60"} hover:text-primary transition-all hover:scale-110`}><User className="w-4 h-4" /></button>
+            <button className="w-9 h-9 rounded-full flex items-center justify-center bg-black/5 dark:bg-white/5 hover:bg-primary hover:text-white transition-all text-foreground">
+              <User className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
-        {/* MOBILE MENU TRIGGER */}
-        <div className="flex lg:hidden items-center gap-4">
-           <button 
-             onClick={() => setIsOpen(!isOpen)}
-             className={`${scrolled ? "text-black" : "text-white"} p-2 hover:bg-white/10 rounded-full transition-colors`}
-           >
-             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-           </button>
+        {/* MOBILE MENU CONTROLS - Positioned right */}
+        <div className="flex lg:hidden items-center gap-2">
+            <button 
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className={`p-2.5 rounded-full ${scrolled ? "text-black bg-black/5" : "text-white bg-white/10"} dark:bg-white/10`}
+            >
+                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className={`p-2.5 rounded-full ${scrolled ? "text-black bg-black/5" : "text-white bg-white/10"} dark:bg-white/10`}
+            >
+                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
         </div>
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* MOBILE MENU OVERLAY - ULTRA BLURRED (DESENFOCADA) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white/95 dark:bg-black/98 backdrop-blur-3xl border-t border-black/5 dark:border-white/10 p-10 flex flex-col items-center gap-8 lg:hidden shadow-2xl"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            className="fixed inset-0 z-[70] bg-white/60 dark:bg-black/80 backdrop-blur-[60px] flex flex-col p-8 pt-24 lg:hidden"
           >
-            {[
-              { name: "Inicio", path: "/" },
-              { name: "Destinos", path: "/destinos" },
-              { name: "Eventos", path: "/eventos" },
-              { name: "Sabor", path: "/sabor" },
-              { name: "Hospedaje", path: "/hospedaje" },
-              { name: "Servicios", path: "/servicios" },
-              { name: "Mapa", path: "/mapa" },
-            ].map((item) => (
-              <Link 
-                key={item.path} 
-                href={item.path} 
-                onClick={() => setIsOpen(false)}
-                className={`text-2xl font-black uppercase tracking-[0.2em] ${pathname === item.path ? "text-primary" : "text-black dark:text-white"}`}
-              >
-                {item.name}
-              </Link>
-            ))}
+            <div className="flex flex-col gap-6 overflow-y-auto no-scrollbar pb-10">
+              {[
+                { name: "Inicio", path: "/" },
+                { name: "Destinos", path: "/destinos" },
+                { name: "Eventos", path: "/eventos" },
+                { name: "Sabor", path: "/sabor" },
+                { name: "Hospedaje", path: "/hospedaje" },
+                { name: "Servicios", path: "/servicios" },
+                { name: "Mapa", path: "/mapa" },
+              ].map((item) => (
+                <Link 
+                  key={item.path} 
+                  href={item.path} 
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-between py-2"
+                >
+                  <span className={`text-4xl font-black uppercase tracking-tight transition-all ${pathname === item.path ? "text-primary italic" : "text-black dark:text-white"}`}>
+                    {item.name}
+                  </span>
+                  <ChevronRight className={`w-6 h-6 ${pathname === item.path ? "text-primary" : "text-black/10 dark:text-white/10"}`} />
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-auto grid grid-cols-2 gap-4 pb-12 pt-8 border-t border-black/5 dark:border-white/5">
+                <button className="flex items-center justify-center gap-2 p-5 bg-black dark:bg-white text-white dark:text-black rounded-3xl font-black text-[9px] uppercase tracking-widest shadow-xl">
+                   <User className="w-4 h-4" /> Perfil
+                </button>
+                <button 
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="flex items-center justify-center gap-2 p-5 bg-gray-100 dark:bg-white/10 text-black dark:text-white rounded-3xl font-black text-[9px] uppercase tracking-widest"
+                >
+                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />} {theme === "dark" ? "Claro" : "Oscuro"}
+                </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
