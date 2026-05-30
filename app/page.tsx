@@ -20,10 +20,7 @@ const destinations = [
 ];
 
 export default function Home() {
-  const heroBg = "media_b2b042ec-759e-4b92-8ee0-9a502344ac1e_1780100778743.jpg"; // Path for Image B in brain (or mapped to storage)
-  // Note: I will use absolute path if possible or the one I found in the brain directory for the mockup purpose.
-  // Assuming the user wants me to use the specific Image B.
-  const imgBPath = "file:///C:/Users/Dell/.gemini/antigravity/brain/b2b042ec-759e-4b92-8ee0-9a502344ac1e/.tempmediaStorage/media_b2b042ec-759e-4b92-8ee0-9a502344ac1e_1780100778743.jpg";
+  const imgBPath = "/hero-b-background.jpg";
 
   return (
     <div className="flex flex-col bg-background">
