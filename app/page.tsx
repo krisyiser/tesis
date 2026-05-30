@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronRight, Sparkles, MapPin, ArrowDown, Landmark, Info } from "lucide-react";
+import { ChevronRight, Sparkles, MapPin, ArrowDown, Landmark, Info, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -94,8 +94,26 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: EXPLORAR MÁS */}
-      <section id="explore" className="py-32 px-6 bg-gray-50 dark:bg-[#050505]">
-          <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
+      <section id="explore" className="py-24 px-6 bg-gray-50 dark:bg-[#050505]">
+          <div className="max-w-[1400px] mx-auto flex flex-col gap-16">
+             
+             {/* SEARCH BANNER (INICIO DE SECCIÓN 2) */}
+             <motion.div 
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               className="relative w-full max-w-3xl mx-auto mb-8"
+             >
+                <div className="absolute inset-y-0 left-6 flex items-center">
+                    <Search className="w-5 h-5 text-gray-400" />
+                </div>
+                <input 
+                    type="text" 
+                    placeholder="Buscador de Papantla..."
+                    className="w-full py-6 pl-16 pr-8 bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-[30px] font-bold text-foreground text-sm focus:ring-4 focus:ring-primary/10 transition-all outline-none"
+                />
+             </motion.div>
+
              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                  {exploreItems.map((item, i) => (
                     <motion.div

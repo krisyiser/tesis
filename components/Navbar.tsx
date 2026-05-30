@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, User, Map as MapIcon, ChevronDown, Sparkles, ChevronRight } from "lucide-react";
+import { Menu, X, Sun, Moon, User, ChevronDown, ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
@@ -22,7 +22,6 @@ export default function Navbar() {
   }, []);
 
   const isHome = pathname === "/";
-  // If not on home, or scrolled, use adaptive colors. Else (Home top) use White.
   const useAdaptive = !isHome || scrolled;
 
   const navItemClass = (path: string) => `
@@ -43,6 +42,16 @@ export default function Navbar() {
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between relative">
         
+        {/* MOBILE: LEFT - Dark Mode Button */}
+        <div className="flex lg:hidden items-center">
+            <button 
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className={`p-2.5 rounded-full transition-all ${useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
+            >
+                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+        </div>
+
         {/* LEFT NAV items (Desktop) */}
         <div className="hidden lg:flex items-center gap-8 flex-1">
           <Link href="/" className={navItemClass("/")}>Inicio</Link>
@@ -51,18 +60,21 @@ export default function Navbar() {
           <Link href="/sabor" className={navItemClass("/sabor")}>Sabor</Link>
         </div>
 
-        {/* CENTER LOGO */}
-        <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 flex flex-col items-center">
+        {/* CENTER LOGO (Mobile & Desktop) */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
             <Link href="/" className="flex flex-col items-center group">
                 <motion.div 
                     animate={scrolled ? { scale: 0.8 } : { scale: 1 }}
                     className="flex flex-col items-center"
                 >
-                    <span className={`text-2xl md:text-3xl font-black tracking-[0.2em] leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"} ${!useAdaptive && "text-shadow-premium"}`}>PAPANTLA</span>
-                    <div className="flex items-center gap-2 mt-1">
-                    <div className="h-[1px] w-4 bg-primary/40" />
-                    <span className="text-[6px] md:text-[7px] font-bold text-primary uppercase tracking-[0.4em] leading-none whitespace-nowrap italic">La Ciudad que Perfuma</span>
-                    <div className="h-[1px] w-4 bg-primary/40" />
+                    {/* tracking-tighter joins text more as requested */}
+                    <span className={`text-2xl md:text-3xl font-black tracking-tighter leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"} ${!useAdaptive && "text-shadow-premium"}`}>
+                        PAPANTLA
+                    </span>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                    <div className="h-[1px] w-3 bg-primary/40" />
+                    <span className="text-[6px] md:text-[7px] font-bold text-primary uppercase tracking-[0.2em] leading-none whitespace-nowrap italic">La Ciudad que Perfuma</span>
+                    <div className="h-[1px] w-3 bg-primary/40" />
                     </div>
                 </motion.div>
             </Link>
@@ -92,33 +104,27 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE MENU CONTROLS */}
-        <div className="flex lg:hidden items-center gap-2">
-            <button 
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className={`p-2.5 rounded-full transition-all ${useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
-            >
-                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+        {/* MOBILE: RIGHT - Menu Button */}
+        <div className="flex lg:hidden items-center">
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className={`p-2.5 rounded-full transition-all ${useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
+                className={`p-2.5 rounded-full transition-all relative z-[80] ${isOpen ? "text-black dark:text-white" : useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
         </div>
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* MOBILE MENU OVERLAY - Minimalist & Transparent */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            className="fixed inset-0 z-[70] bg-white/80 dark:bg-black/90 backdrop-blur-[60px] flex flex-col p-8 pt-24 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[70] bg-white/10 dark:bg-black/30 backdrop-blur-[40px] flex flex-col p-8 pt-32 lg:hidden"
           >
-            <div className="flex flex-col gap-6 overflow-y-auto no-scrollbar pb-10">
+            <div className="flex flex-col gap-8 overflow-y-auto no-scrollbar pb-10">
               {[
                 { name: "Inicio", path: "/" },
                 { name: "Destinos", path: "/destinos" },
@@ -132,9 +138,10 @@ export default function Navbar() {
                   key={item.path} 
                   href={item.path} 
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-2 group"
+                  className="flex items-center justify-between py-1 group"
                 >
-                  <span className={`text-4xl font-black uppercase tracking-tight transition-all ${pathname === item.path ? "text-primary italic scale-105" : "text-foreground group-hover:text-primary"}`}>
+                  {/* Minimalist font weight and tracking */}
+                  <span className={`text-5xl font-light tracking-tighter transition-all ${pathname === item.path ? "text-primary font-medium" : "text-foreground group-hover:text-primary"}`}>
                     {item.name}
                   </span>
                   <ChevronRight className={`w-6 h-6 ${pathname === item.path ? "text-primary" : "text-foreground/10"}`} />
@@ -147,10 +154,10 @@ export default function Navbar() {
                    <User className="w-4 h-4" /> Perfil
                 </button>
                 <button 
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="flex items-center justify-center gap-2 p-5 bg-gray-100 dark:bg-white/10 text-foreground rounded-[30px] font-black text-[9px] uppercase tracking-widest"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 p-5 bg-white/20 dark:bg-white/10 text-foreground border border-black/5 dark:border-white/5 rounded-[30px] font-black text-[9px] uppercase tracking-widest"
                 >
-                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />} {theme === "dark" ? "Claro" : "Oscuro"}
+                  Cerrar Menú
                 </button>
             </div>
           </motion.div>
