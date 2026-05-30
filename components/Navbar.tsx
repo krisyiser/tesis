@@ -57,9 +57,9 @@ export default function Navbar() {
               {item.name}
             </Link>
           ))}
-          <button className={`p-2 rounded-full transition-colors ${scrolled ? "hover:bg-gray-100 text-gray-600" : "hover:bg-white/10 text-white"}`}>
+          <Link href="/mapa" className={`p-2 rounded-full transition-colors ${scrolled ? "hover:bg-gray-100 text-gray-600" : "hover:bg-white/10 text-white"}`}>
             <MapIcon className="w-5 h-5" />
-          </button>
+          </Link>
           <button className="px-6 py-2.5 bg-primary text-white rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20">
             Explora
           </button>
@@ -67,9 +67,9 @@ export default function Navbar() {
 
         {/* MOBILE ACTIONS */}
         <div className="flex md:hidden items-center gap-4">
-          <button className={`p-2 rounded-full ${scrolled ? "text-gray-800" : "text-white"}`}>
+          <Link href="/mapa" className={`p-2 rounded-full ${scrolled ? "text-gray-800" : "text-white"}`}>
             <MapIcon className="w-5 h-5" />
-          </button>
+          </Link>
           <button 
             onClick={() => setIsOpen(!isOpen)}
             className={`p-2 rounded-full ${scrolled ? "text-gray-800" : "text-white"}`}
