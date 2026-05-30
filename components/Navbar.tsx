@@ -3,17 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Map as MapIcon, Globe, Search } from "lucide-react";
+import { Menu, X, Sun, User, Map as MapIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  { name: "Inicio", path: "/" },
-  { name: "Destinos", path: "/destinos" },
-  { name: "Sabor", path: "/sabor" },
-  { name: "Hospedaje", path: "/hospedaje" },
-  { name: "Eventos", path: "/eventos" },
-  { name: "Servicios", path: "/servicios" },
-];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,81 +20,73 @@ export default function Navbar() {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-white/80 dark:bg-black/80 backdrop-blur-xl py-4 shadow-lg" : "bg-transparent py-6"
+        scrolled ? "bg-black/90 backdrop-blur-xl py-4 shadow-lg" : "bg-black/40 py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-black italic text-xl shadow-lg group-hover:scale-110 transition-transform">P</div>
-          <div className="flex flex-col leading-none">
-            <span className={`font-black text-xl tracking-tighter ${scrolled ? "text-foreground" : "text-white"}`}>PAPANTLA</span>
-            <span className={`text-[8px] font-bold uppercase tracking-[0.3em] ${scrolled ? "text-gray-400" : "text-white/60"}`}>Turismo Premium</span>
-          </div>
-        </Link>
-
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <Link 
-              key={item.path} 
-              href={item.path}
-              className={`text-sm font-bold tracking-tight transition-colors hover:text-primary ${
-                pathname === item.path 
-                  ? "text-primary" 
-                  : scrolled ? "text-gray-600 dark:text-gray-300" : "text-white"
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Link href="/mapa" className={`p-2 rounded-full transition-colors ${scrolled ? "hover:bg-gray-100 text-gray-600" : "hover:bg-white/10 text-white"}`}>
-            <MapIcon className="w-5 h-5" />
-          </Link>
-          <button className="px-6 py-2.5 bg-primary text-white rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20">
-            Explora
-          </button>
+      <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between">
+        
+        {/* LEFT NAV items (Desktop) */}
+        <div className="hidden md:flex items-center gap-10 flex-1">
+          <Link href="/" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${pathname === '/' ? "text-primary" : "text-white hover:text-primary"}`}>Inicio</Link>
+          <Link href="/eventos" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${pathname === '/eventos' ? "text-primary" : "text-white hover:text-primary"}`}>Eventos</Link>
+          <Link href="/sabor" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${pathname === '/sabor' ? "text-primary" : "text-white hover:text-primary"}`}>Sabor</Link>
         </div>
 
-        {/* MOBILE ACTIONS */}
+        {/* CENTER LOGO */}
+        <Link href="/" className="flex flex-col items-center flex-1">
+          <span className="text-2xl font-black text-white tracking-widest leading-none">PAPANTLA</span>
+          <span className="text-[6px] font-bold text-primary uppercase tracking-[0.3em] mt-1 leading-none">La Ciudad que Perfuma</span>
+        </Link>
+
+        {/* RIGHT NAV items (Desktop) */}
+        <div className="hidden md:flex items-center justify-end gap-8 flex-1">
+          <Link href="/hospedaje" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${pathname === '/hospedaje' ? "text-primary" : "text-white hover:text-primary"}`}>Hoteles</Link>
+          <Link href="/mapa" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${pathname === '/mapa' ? "text-primary" : "text-white hover:text-primary"}`}>Mapa</Link>
+          
+          <div className="h-4 w-[1px] bg-white/20 mx-2" />
+          
+          <button className="text-white text-[10px] font-black uppercase tracking-widest">ES</button>
+          <button className="text-white opacity-60 hover:opacity-100 transition-opacity"><Sun className="w-4 h-4" /></button>
+          <button className="text-white opacity-60 hover:opacity-100 transition-opacity"><User className="w-4 h-4" /></button>
+        </div>
+
+        {/* MOBILE MENU TRIGGER */}
         <div className="flex md:hidden items-center gap-4">
-          <Link href="/mapa" className={`p-2 rounded-full ${scrolled ? "text-gray-800" : "text-white"}`}>
-            <MapIcon className="w-5 h-5" />
-          </Link>
-          <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className={`p-2 rounded-full ${scrolled ? "text-gray-800" : "text-white"}`}
-          >
-            {isOpen ? <X /> : <Menu />}
-          </button>
+           <button 
+             onClick={() => setIsOpen(!isOpen)}
+             className="text-white p-2"
+           >
+             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+           </button>
         </div>
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* MOBILE MENU (Fallback if BottomNavbar isn't enough) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white dark:bg-black border-b border-black/5 p-6 flex flex-col gap-4 shadow-2xl md:hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-3xl border-t border-white/5 p-8 flex flex-col gap-6 md:hidden"
           >
-            {navItems.map((item) => (
+            {[
+              { name: "Inicio", path: "/" },
+              { name: "Destinos", path: "/destinos" },
+              { name: "Sabor", path: "/sabor" },
+              { name: "Hospedaje", path: "/hospedaje" },
+              { name: "Eventos", path: "/eventos" },
+              { name: "Servicios", path: "/servicios" },
+            ].map((item) => (
               <Link 
                 key={item.path} 
-                href={item.path}
+                href={item.path} 
                 onClick={() => setIsOpen(false)}
-                className={`text-lg font-bold p-2 ${pathname === item.path ? "text-primary" : "text-gray-600 dark:text-gray-300"}`}
+                className="text-white text-xl font-black uppercase tracking-widest text-center"
               >
                 {item.name}
               </Link>
             ))}
-            <hr className="border-black/5" />
-            <div className="flex gap-4">
-               <button className="flex-1 py-4 bg-primary text-white rounded-2xl font-black uppercase text-xs tracking-widest">
-                  Mapa Interactivo
-               </button>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

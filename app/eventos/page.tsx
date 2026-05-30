@@ -1,129 +1,121 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Calendar as CalendarIcon, Filter, MapPin, ChevronRight, Music, Users, Camera, Globe, Sparkles } from "lucide-react";
-import IOSCard from "@/components/IOSCard";
+import { motion } from "framer-motion";
+import { Calendar, Bell, Sparkles, Filter, ChevronRight, Clock, MapPin } from "lucide-react";
+import Image from "next/image";
 
-const categories = [
-  { id: 'all', name: 'Todos', icon: Globe },
-  { id: 'tradicion', name: 'Tradición', icon: Sparkles },
-  { id: 'musica', name: 'Música', icon: Music },
-  { id: 'cultura', name: 'Cultura', icon: Users },
-  { id: 'foto', name: 'Fotografía', icon: Camera },
+const featuredEvents = [
+  {
+    title: "Cumbre Tajín",
+    date: "Marzo",
+    img: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=80",
+    color: "from-primary",
+  },
+  {
+    title: "Feria de Corpus Christi",
+    date: "Junio",
+    img: "https://images.unsplash.com/photo-1505232458567-cc9660517eaa?auto=format&fit=crop&q=80",
+    color: "from-orange-500",
+  },
+  {
+    title: "Festival de la Vainilla",
+    date: "Octubre",
+    img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80",
+    color: "from-yellow-600",
+  },
 ];
 
-const events = [
-  { title: "Cumbre Tajín", category: "tradicion", date: "20", month: "MAR", desc: "El festival cultural más importante del estado.", img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" },
-  { title: "Feria de Corpus Christi", category: "tradicion", date: "15", month: "JUN", desc: "Homenaje a la fe y la cultura totonaca.", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80" },
-  { title: "Ninin (Día de Muertos)", category: "cultura", date: "01", month: "NOV", desc: "Regreso de las almas al Totonacapan.", img: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&q=80" },
-  { title: "Viernes de Danzón", category: "musica", date: "Vie", month: "SEM", desc: "Baile tradicional en el zócalo.", img: "https://images.unsplash.com/photo-1514525253361-bee873830dbb?auto=format&fit=crop&q=80" },
+const calendarEvents = [
+  { day: "15", month: "JUN", title: "Procesión de Corpus Christi", category: "Religioso", time: "10:00 AM", location: "Centro Histórico" },
+  { day: "16", month: "JUN", title: "Danza de los Guaguas", category: "Tradicional", time: "12:00 PM", location: "Plaza Central" },
+  { day: "18", month: "JUN", title: "Concierto Festival", category: "Música", time: "08:00 PM", location: "Domo de la Parroquia" },
 ];
 
 export default function EventosPage() {
-  const [activeCat, setActiveCat] = useState('all');
-
-  const filteredEvents = activeCat === 'all' 
-    ? events 
-    : events.filter(e => e.category === activeCat);
-
   return (
     <div className="pb-32 flex flex-col bg-background min-h-screen">
-      <header className="px-6 pt-32 pb-10 flex flex-col gap-6 bg-gradient-to-b from-primary/5 to-transparent">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/20">
-            <CalendarIcon className="w-7 h-7" />
-          </div>
-          <h1 className="text-4xl font-black tracking-tighter text-foreground italic">Cartelera <span className="text-primary not-italic">Cultural</span></h1>
+      {/* HEADER SECTION (Image C style) */}
+      <header className="px-6 pt-32 pb-8 flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+           <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner">
+                <Calendar className="w-6 h-6" />
+              </div>
+              <h1 className="text-4xl font-black tracking-tighter text-foreground italic">Eventos</h1>
+           </div>
+           <button className="p-3 bg-gray-100 dark:bg-white/5 rounded-full text-gray-400">
+             <Bell className="w-5 h-5" />
+           </button>
         </div>
-
-        {/* CATEGORY FILTERS */}
-        <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-6 px-6">
-           {categories.map((cat) => (
-             <button
-               key={cat.id}
-               onClick={() => setActiveCat(cat.id)}
-               className={`flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest whitespace-nowrap transition-all ${
-                 activeCat === cat.id 
-                 ? "bg-primary text-white shadow-lg shadow-primary/20" 
-                 : "bg-gray-100 text-gray-500 dark:bg-white/5"
-               }`}
-             >
-               <cat.icon className="w-4 h-4" />
-               {cat.name}
-             </button>
-           ))}
-        </div>
+        <p className="text-gray-400 font-bold text-sm tracking-tight leading-relaxed max-w-xs">
+          Vibrante cultura en el corazón del Totonacapan.
+        </p>
       </header>
 
-      <div className="px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* CALENDAR SECTION */}
-        <section className="flex flex-col gap-6">
-           <h2 className="text-xl font-black tracking-tight uppercase flex items-center gap-2">
-              <span className="w-2 h-2 bg-primary rounded-full" />
-              Calendario 2026
-           </h2>
-           <div className="bg-white dark:bg-white/5 border border-black/5 rounded-[40px] p-8 shadow-sm">
-              <div className="grid grid-cols-7 gap-2 mb-4">
-                 {['D','L','M','M','J','V','S'].map(d => (
-                    <span key={d} className="text-center text-[10px] font-black text-gray-300 uppercase">{d}</span>
-                 ))}
-                 {Array.from({length: 31}).map((_, i) => (
-                    <div 
-                      key={i} 
-                      className={`aspect-square flex items-center justify-center text-sm font-bold rounded-xl transition-colors ${
-                        [15, 20].includes(i+1) ? "bg-primary text-white" : "hover:bg-gray-50 dark:hover:bg-white/10"
-                      }`}
-                    >
-                       {i + 1}
-                    </div>
-                 ))}
-              </div>
-              <div className="mt-6 flex flex-col gap-4">
-                 <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full bg-primary" />
-                    <span className="text-xs font-bold text-gray-500 uppercase">Eventos Próximos</span>
-                 </div>
-              </div>
-           </div>
-        </section>
+      {/* FEATURED CAROUSEL (Imperdibles) - Image C style */}
+      <section className="px-6 flex flex-col gap-6">
+         <div className="flex items-center gap-2 text-foreground font-black text-xs uppercase tracking-[0.2em]">
+            <Sparkles className="w-4 h-4 text-primary" /> Imperdibles
+         </div>
+         
+         <div className="flex gap-4 overflow-x-auto pb-6 -mx-6 px-6 no-scrollbar snap-x">
+            {featuredEvents.map((event, i) => (
+               <motion.div
+                 key={i}
+                 whileTap={{ scale: 0.95 }}
+                 className="min-w-[280px] h-[400px] relative rounded-[40px] overflow-hidden snap-start shadow-xl"
+               >
+                  <img 
+                    src={event.img} 
+                    alt={event.title} 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${event.color}/60 via-transparent to-transparent`} />
+                  <div className="absolute bottom-10 left-8">
+                     <span className="text-[10px] font-black uppercase text-white/70 tracking-widest leading-none mb-1 block">{event.date}</span>
+                     <h3 className="text-2xl font-black text-white leading-tight tracking-tight max-w-[180px]">{event.title}</h3>
+                  </div>
+               </motion.div>
+            ))}
+         </div>
+      </section>
 
-        {/* EVENTS LIST */}
-        <section className="flex flex-col gap-6">
-          <h2 className="text-xl font-black tracking-tight uppercase flex items-center gap-2">
-              <span className="w-2 h-2 bg-primary rounded-full" />
-              Destacados
-          </h2>
-          <AnimatePresence mode="popLayout">
-            <div className="flex flex-col gap-4">
-              {filteredEvents.map((event, i) => (
-                <motion.div
-                  key={event.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white/60 dark:bg-white/5 p-4 rounded-[32px] border border-black/5 flex gap-5 hover:border-primary/20 transition-all group"
-                >
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 relative">
-                     <img src={event.img} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt={event.title} />
-                     <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
-                  </div>
-                  <div className="flex flex-col justify-center gap-1">
-                     <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-black text-primary uppercase">{event.month} {event.date}</span>
-                        <span className="w-1 h-1 rounded-full bg-gray-300" />
-                        <span className="text-[10px] font-black text-gray-400 capitalize">{event.category}</span>
-                     </div>
-                     <h3 className="font-bold text-lg leading-tight">{event.title}</h3>
-                     <p className="text-xs text-gray-500 line-clamp-1">{event.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
+      {/* CALENDAR SECTION */}
+      <section className="px-6 mt-8">
+         <div className="flex items-center justify-between mb-8">
+            <h4 className="text-xl font-black tracking-tight text-foreground italic">Calendario <span className="not-italic text-primary">de Eventos</span></h4>
+            <div className="flex gap-2">
+               <button className="p-2 bg-gray-100 dark:bg-white/5 rounded-xl"><Filter className="w-4 h-4 text-gray-400" /></button>
             </div>
-          </AnimatePresence>
-        </section>
-      </div>
+         </div>
+
+         <div className="grid grid-cols-1 gap-4">
+            {calendarEvents.map((ev, i) => (
+               <motion.div
+                 key={i}
+                 className="bg-white dark:bg-white/5 p-6 rounded-[35px] border border-black/5 shadow-md flex items-center gap-6"
+               >
+                  <div className="flex flex-col items-center">
+                     <span className="text-primary font-black text-2xl leading-none">{ev.day}</span>
+                     <span className="text-[10px] font-bold text-gray-400 leading-none">{ev.month}</span>
+                  </div>
+                  <div className="flex-1 flex flex-col">
+                     <span className="text-primary font-bold text-[8px] uppercase tracking-widest mb-1">{ev.category}</span>
+                     <h5 className="font-black text-foreground tracking-tight leading-none mb-2">{ev.title}</h5>
+                     <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1 text-[8px] font-bold text-gray-400 uppercase tracking-widest">
+                           <Clock className="w-3 h-3" /> {ev.time}
+                        </div>
+                        <div className="flex items-center gap-1 text-[8px] font-bold text-gray-400 uppercase tracking-widest">
+                           <MapPin className="w-3 h-3" /> {ev.location}
+                        </div>
+                     </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-300" />
+               </motion.div>
+            ))}
+         </div>
+      </section>
     </div>
   );
 }
