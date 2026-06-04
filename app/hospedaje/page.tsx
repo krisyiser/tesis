@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Bed, Star, MapPin, Phone, Calendar, ArrowRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 const hotels = [
   {
@@ -117,16 +118,19 @@ export default function HospedajePage() {
       </header>
 
       <section className="px-6 flex flex-col gap-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hotels.map((hotel, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[40px] overflow-hidden shadow-2xl transition-all hover:border-primary/30"
-            >
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {hotels.map((hotel, i) => (
+        <Link 
+          key={i} 
+          href={`/hospedaje/${hotel.name.toLowerCase().replace(/\s+/g, '-')}`}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.05 }}
+            className="group relative bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-[40px] overflow-hidden shadow-2xl transition-all hover:border-primary/30 h-full"
+          >
               {/* Image Container */}
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img 
@@ -158,22 +162,31 @@ export default function HospedajePage() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-3">
+                <div className="flex flex-col gap-3">
+                  <div className="flex gap-3">
+                    <button 
+                      onClick={() => window.open(`https://www.google.com/maps/search/${encodeURIComponent(hotel.name + " " + hotel.address)}`, "_blank")}
+                      className="flex-1 h-12 rounded-2xl bg-primary text-white font-black text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform"
+                    >
+                      <MapPin className="w-3.5 h-3.5" /> Ubicación
+                    </button>
+                    <button 
+                      onClick={() => window.location.href = `tel:${hotel.phone}`}
+                      className="flex-1 h-12 rounded-2xl bg-green-500 text-white font-black text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-green-500/20 active:scale-95 transition-transform"
+                    >
+                      <Phone className="w-3.5 h-3.5" /> Llamar
+                    </button>
+                  </div>
                   <button 
-                    onClick={() => window.open(`https://www.google.com/maps/search/${encodeURIComponent(hotel.name + " " + hotel.address)}`, "_blank")}
-                    className="flex-1 h-12 rounded-2xl bg-primary text-white font-black text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform"
+                    className="w-full h-12 rounded-2xl bg-white/10 border border-white/10 text-foreground font-black text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white/20 active:scale-95 transition-all text-center"
                   >
-                    <MapPin className="w-3.5 h-3.5" /> Ubicación
-                  </button>
-                  <button 
-                    className="flex-1 h-12 rounded-2xl bg-white/10 border border-white/10 text-foreground font-black text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white/20 active:scale-95 transition-all"
-                  >
-                    <Calendar className="w-3.5 h-3.5" /> Reservar
+                    <Calendar className="w-3.5 h-3.5" /> Reservar Ahora
                   </button>
                 </div>
               </div>
             </motion.div>
-          ))}
+          </Link>
+        ))}
         </div>
       </section>
     </div>

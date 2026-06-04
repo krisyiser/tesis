@@ -15,11 +15,16 @@
 }
 
 @layer base {
+  html {
+    font-size: 90%; /* Global font size reduction */
+  }
   body {
-    @apply bg-background text-foreground transition-colors duration-500;
+    @apply bg-background text-foreground transition-colors duration-500 font-sans tracking-tight;
+    font-feature-settings: 'ss01', 'cv01', 'cv11';
+    -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply text-foreground transition-colors duration-500;
+    @apply text-foreground transition-colors duration-500 tracking-tighter;
   }
 }
 

@@ -19,6 +19,7 @@ import {
   Search
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const traditionalMenu = [
   { title: "Zacahuil", sub: "Rey de los tamales", img: "/images/sabores/zacahuil.jpg" },
@@ -246,16 +247,19 @@ export default function SaborPage() {
               <p className="text-gray-400 font-medium tracking-tight">Especialidades locales que preservan el legado Totonaca.</p>
             </header>
 
-            <div className="flex flex-col gap-8 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 pb-10">
               {traditionalRestaurants.map((resto, i) => (
-                <motion.div 
+                <Link 
                   key={i} 
-                  initial={{ opacity: 0, y: 20 }}
+                  href={`/sabor/${resto.name.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="bg-white dark:bg-white/5 rounded-[32px] border border-black/5 flex flex-col overflow-hidden shadow-lg group"
+                  className="bg-white dark:bg-zinc-900 rounded-[32px] border border-black/5 dark:border-white/5 flex flex-col overflow-hidden shadow-lg group hover:border-primary/30 transition-all"
                 >
-                  <div className="relative h-56 w-full overflow-hidden">
+                  <div className="relative h-48 w-full overflow-hidden">
                     <Image 
                       src={resto.image} 
                       alt={resto.name}
@@ -263,31 +267,32 @@ export default function SaborPage() {
                       className="object-cover group-hover:scale-110 transition-transform duration-1000"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="font-black text-2xl tracking-tight text-white mb-2">{resto.name}</h3>
-                      <div className="flex items-start gap-2 text-white/70 text-xs">
-                        <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="line-clamp-2 leading-relaxed">{resto.address}</span>
+                    <div className="absolute bottom-4 left-5 right-5">
+                      <h3 className="font-black text-xl tracking-tight text-white mb-1">{resto.name}</h3>
+                      <div className="flex items-start gap-1.5 text-white/70 text-[10px]">
+                        <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="line-clamp-1 leading-relaxed">{resto.address}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="p-5 flex gap-3 bg-white dark:bg-[#121212]">
+                  <div className="p-4 flex gap-2 bg-white dark:bg-transparent">
                     <button 
                       onClick={() => openMap(resto.mapUrl)}
-                      className="flex-1 bg-primary/10 hover:bg-primary/20 text-primary py-4 rounded-2xl flex items-center justify-center gap-2 font-black text-sm transition-all active:scale-95"
+                      className="flex-1 bg-primary/10 hover:bg-primary/20 text-primary py-3 rounded-xl flex items-center justify-center gap-2 font-black text-xs transition-all active:scale-95"
                     >
-                      <MapPin className="w-4 h-4" />
+                      <MapPin className="w-3.5 h-3.5" />
                       Ubicación
                     </button>
                     <button 
                       onClick={() => callNumber(resto.phone)}
-                      className="flex-1 bg-secondary/10 hover:bg-secondary/20 text-secondary py-4 rounded-2xl flex items-center justify-center gap-2 font-black text-sm transition-all active:scale-95"
+                      className="flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-600 py-3 rounded-xl flex items-center justify-center gap-2 font-black text-xs transition-all active:scale-95"
                     >
-                      <Phone className="w-4 h-4" />
+                      <Phone className="w-3.5 h-3.5" />
                       Llamar
                     </button>
                   </div>
                 </motion.div>
+                </Link>
               ))}
             </div>
           </motion.div>
@@ -327,16 +332,19 @@ export default function SaborPage() {
               ))}
             </div>
 
-            <div className="flex flex-col gap-8 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
               {filteredBusinesses.map((biz, i) => (
-                <motion.div 
+                <Link 
                   key={i} 
-                  initial={{ opacity: 0, y: 20 }}
+                  href={`/sabor/${biz.name.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="bg-white dark:bg-white/5 rounded-[32px] border border-black/5 flex flex-col overflow-hidden shadow-lg group"
+                  className="bg-white dark:bg-zinc-900 rounded-[32px] border border-black/5 dark:border-white/5 flex flex-col overflow-hidden shadow-lg group hover:border-primary/30 transition-all"
                 >
-                  <div className="relative h-48 w-full overflow-hidden">
+                  <div className="relative h-44 w-full overflow-hidden">
                     <Image 
                       src={biz.image} 
                       alt={biz.name}
@@ -344,40 +352,41 @@ export default function SaborPage() {
                       className="object-cover group-hover:scale-110 transition-transform duration-1000"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                    <div className="absolute top-4 left-6 flex flex-wrap gap-2">
+                    <div className="absolute top-3 left-4 flex flex-wrap gap-1.5">
                        {biz.categories.map(c => (
-                        <span key={c} className="text-[9px] uppercase font-black tracking-widest text-white bg-primary px-3 py-1 rounded-full shadow-lg backdrop-blur-md bg-opacity-80">
+                        <span key={c} className="text-[8px] uppercase font-black tracking-widest text-white bg-primary px-2.5 py-1 rounded-lg backdrop-blur-md bg-opacity-80">
                           {c}
                         </span>
                       ))}
                     </div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="font-black text-2xl tracking-tight text-white mb-2">{biz.name}</h3>
-                      <div className="flex items-start gap-2 text-white/70 text-[11px]">
+                    <div className="absolute bottom-4 left-5 right-5">
+                      <h3 className="font-black text-xl tracking-tight text-white mb-1 line-clamp-1">{biz.name}</h3>
+                      <div className="flex items-start gap-1.5 text-white/70 text-[9px]">
                         <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
                         <span className="line-clamp-1">{biz.address}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="p-5 flex gap-3 bg-white dark:bg-[#121212]">
+                  <div className="p-4 flex gap-2 bg-white dark:bg-transparent">
                     <button 
                       onClick={() => openMap(biz.mapUrl)}
-                      className="flex-1 bg-primary/10 hover:bg-primary/20 text-primary py-4 rounded-2xl flex items-center justify-center gap-2 font-black text-sm transition-all active:scale-95"
+                      className="flex-1 bg-primary/10 hover:bg-primary/20 text-primary py-3 rounded-xl flex items-center justify-center gap-2 font-black text-xs transition-all active:scale-95"
                     >
-                      <MapPin className="w-4 h-4" />
+                      <MapPin className="w-3.5 h-3.5" />
                       Ubicación
                     </button>
                     {biz.phone && (
                       <button 
                         onClick={() => callNumber(biz.phone)}
-                        className="flex-1 bg-secondary/10 hover:bg-secondary/20 text-secondary py-4 rounded-2xl flex items-center justify-center gap-2 font-black text-sm transition-all active:scale-95"
+                        className="flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-600 py-3 rounded-xl flex items-center justify-center gap-2 font-black text-xs transition-all active:scale-95"
                       >
-                        <Phone className="w-4 h-4" />
+                        <Phone className="w-3.5 h-3.5" />
                         Llamar
                       </button>
                     )}
                   </div>
                 </motion.div>
+                </Link>
               ))}
             </div>
           </motion.div>
