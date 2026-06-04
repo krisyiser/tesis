@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapPin, Navigation, User } from "lucide-react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { tourismData } from "@/data/tourism";
 
 // Fix for default marker icons in Leaflet with Next.js
 const createIcon = (color: string) => {
@@ -42,15 +44,12 @@ const defaultIcon = createIcon("#8B2635");
 const secondaryIcon = createIcon("#D4AF37");
 
 // DATA from Sabores
-const locations = [
-  { name: "Restaurante Nakú", coords: [20.4485, -97.3245], type: "Sabores" },
-  { name: "La Boca", coords: [20.4430, -97.3210], type: "Sabores" },
-  { name: "Restaurante Totonaco", coords: [20.4490, -97.3220], type: "Sabores" },
-  { name: "Don Pope", coords: [20.4450, -97.3235], type: "Sabores" },
-  { name: "Café Catedral", coords: [20.4465, -97.3225], type: "Alimentos" },
-  { name: "Zacahuil Perla", coords: [20.4440, -97.3205], type: "Alimentos" },
-  { name: "Mural Totonaca", coords: [20.4460, -97.3228], type: "Mural" },
-];
+const locations = tourismData.map(item => ({
+  name: item.title,
+  coords: item.coords,
+  type: item.category === "sabor" ? "Sabores" : item.category === "mural" ? "Mural" : "Destinos",
+  id: item.id
+}));
 
 function LocationMarker({ setUserPos }: { setUserPos: (pos: [number, number]) => void }) {
   const [position, setPosition] = useState<[number, number] | null>(null);
@@ -103,10 +102,18 @@ export default function MapView() {
             position={loc.coords as [number, number]} 
             icon={loc.type === "Sabores" ? defaultIcon : loc.type === "Mural" ? secondaryIcon : defaultIcon}
           >
-            <Popup>
-              <div className="p-2">
-                <h4 className="font-black text-sm">{loc.name}</h4>
-                <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">{loc.type}</p>
+            <Popup className="premium-popup">
+              <div className="p-3 min-w-[150px]">
+                <h4 className="font-black text-sm mb-1">{loc.name}</h4>
+                <p className="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-3">{loc.type}</p>
+                <div className="flex flex-col gap-2">
+                   <Link 
+                      href={`/${loc.type === "Sabores" ? "sabor" : loc.type === "Mural" ? "destinos" : "destinos"}/${loc.id}`}
+                      className="bg-primary text-white text-[9px] font-black uppercase py-2 px-3 rounded-xl text-center shadow-lg shadow-primary/20 active:scale-95 transition-all"
+                   >
+                      Ver Detalles
+                   </Link>
+                </div>
               </div>
             </Popup>
           </Marker>

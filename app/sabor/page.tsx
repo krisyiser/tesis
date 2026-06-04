@@ -249,32 +249,31 @@ export default function SaborPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 pb-10">
               {traditionalRestaurants.map((resto, i) => (
-                <Link 
+                <motion.div 
                   key={i} 
-                  href={`/sabor/${resto.name.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   className="bg-white dark:bg-zinc-900 rounded-[32px] border border-black/5 dark:border-white/5 flex flex-col overflow-hidden shadow-lg group hover:border-primary/30 transition-all"
                 >
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <Image 
-                      src={resto.image} 
-                      alt={resto.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                    <div className="absolute bottom-4 left-5 right-5">
-                      <h3 className="font-black text-xl tracking-tight text-white mb-1">{resto.name}</h3>
-                      <div className="flex items-start gap-1.5 text-white/70 text-[10px]">
-                        <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="line-clamp-1 leading-relaxed">{resto.address}</span>
+                  <Link href={`/sabor/${resto.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image 
+                        src={resto.image} 
+                        alt={resto.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                      <div className="absolute bottom-4 left-5 right-5">
+                        <h3 className="font-black text-xl tracking-tight text-white mb-1 group-hover:text-primary transition-colors">{resto.name}</h3>
+                        <div className="flex items-start gap-1.5 text-white/70 text-[10px]">
+                          <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
+                          <span className="line-clamp-1 leading-relaxed">{resto.address}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                   <div className="p-4 flex gap-2 bg-white dark:bg-transparent">
                     <button 
                       onClick={() => openMap(resto.mapUrl)}
@@ -292,7 +291,6 @@ export default function SaborPage() {
                     </button>
                   </div>
                 </motion.div>
-                </Link>
               ))}
             </div>
           </motion.div>
@@ -334,39 +332,38 @@ export default function SaborPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
               {filteredBusinesses.map((biz, i) => (
-                <Link 
+                <motion.div 
                   key={i} 
-                  href={`/sabor/${biz.name.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   className="bg-white dark:bg-zinc-900 rounded-[32px] border border-black/5 dark:border-white/5 flex flex-col overflow-hidden shadow-lg group hover:border-primary/30 transition-all"
                 >
-                  <div className="relative h-44 w-full overflow-hidden">
-                    <Image 
-                      src={biz.image} 
-                      alt={biz.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                    <div className="absolute top-3 left-4 flex flex-wrap gap-1.5">
-                       {biz.categories.map(c => (
-                        <span key={c} className="text-[8px] uppercase font-black tracking-widest text-white bg-primary px-2.5 py-1 rounded-lg backdrop-blur-md bg-opacity-80">
-                          {c}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="absolute bottom-4 left-5 right-5">
-                      <h3 className="font-black text-xl tracking-tight text-white mb-1 line-clamp-1">{biz.name}</h3>
-                      <div className="flex items-start gap-1.5 text-white/70 text-[9px]">
-                        <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="line-clamp-1">{biz.address}</span>
+                  <Link href={`/sabor/${biz.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <div className="relative h-44 w-full overflow-hidden">
+                      <Image 
+                        src={biz.image} 
+                        alt={biz.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                      <div className="absolute top-3 left-4 flex flex-wrap gap-1.5">
+                        {biz.categories.map(c => (
+                          <span key={c} className="text-[8px] uppercase font-black tracking-widest text-white bg-primary px-2.5 py-1 rounded-lg backdrop-blur-md bg-opacity-80">
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="absolute bottom-4 left-5 right-5">
+                        <h3 className="font-black text-xl tracking-tight text-white mb-1 line-clamp-1 group-hover:text-primary transition-colors">{biz.name}</h3>
+                        <div className="flex items-start gap-1.5 text-white/70 text-[9px]">
+                          <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
+                          <span className="line-clamp-1">{biz.address}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                   <div className="p-4 flex gap-2 bg-white dark:bg-transparent">
                     <button 
                       onClick={() => openMap(biz.mapUrl)}
@@ -386,7 +383,6 @@ export default function SaborPage() {
                     )}
                   </div>
                 </motion.div>
-                </Link>
               ))}
             </div>
           </motion.div>

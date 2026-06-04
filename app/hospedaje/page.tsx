@@ -120,17 +120,14 @@ export default function HospedajePage() {
       <section className="px-6 flex flex-col gap-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {hotels.map((hotel, i) => (
-        <Link 
-          key={i} 
-          href={`/hospedaje/${hotel.name.toLowerCase().replace(/\s+/g, '-')}`}
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.05 }}
+          className="group relative bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-[40px] overflow-hidden shadow-2xl transition-all hover:border-primary/30 h-full flex flex-col"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className="group relative bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-[40px] overflow-hidden shadow-2xl transition-all hover:border-primary/30 h-full"
-          >
               {/* Image Container */}
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img 
@@ -145,11 +142,15 @@ export default function HospedajePage() {
               </div>
 
               {/* Content */}
-              <div className="p-7">
-                <h3 className="text-2xl font-black text-foreground tracking-tight mb-2 group-hover:text-primary transition-colors">
-                  {hotel.name}
-                </h3>
-                
+              <Link href={`/hospedaje/${hotel.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                <div className="p-7">
+                  <h3 className="text-2xl font-black text-foreground tracking-tight mb-2 group-hover:text-primary transition-colors">
+                    {hotel.name}
+                  </h3>
+                </div>
+              </Link>
+              
+              <div className="px-7 pb-7">
                 <div className="flex flex-col gap-2 mb-6">
                   <div className="flex items-start gap-2 text-muted-foreground text-xs leading-relaxed">
                     <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -185,8 +186,7 @@ export default function HospedajePage() {
                 </div>
               </div>
             </motion.div>
-          </Link>
-        ))}
+          ))}
         </div>
       </section>
     </div>
