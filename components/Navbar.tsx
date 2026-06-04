@@ -30,14 +30,15 @@ export default function Navbar() {
     hover:text-primary dark:hover:text-primary
   `;
 
-  if (!mounted) return null;
+  // Pre-calculate theme icon to avoid flicker
+  const themeIcon = mounted && theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />;
 
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${
         scrolled 
           ? "bg-white/80 dark:bg-black/80 backdrop-blur-3xl py-4 shadow-2xl border-b border-black/5 dark:border-white/5" 
-          : isHome ? "bg-transparent py-8" : "bg-white/50 dark:bg-black/50 backdrop-blur-xl py-4 border-b border-black/5 dark:border-white/5 shadow-lg shadow-black/5"
+          : isHome ? "bg-transparent py-8" : "bg-white/95 dark:bg-black/95 backdrop-blur-xl py-4 border-b border-black/5 dark:border-white/5 shadow-lg shadow-black/5"
       }`}
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between relative">
@@ -48,7 +49,7 @@ export default function Navbar() {
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className={`p-2.5 rounded-full transition-all ${useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
             >
-                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {themeIcon}
             </button>
         </div>
 
@@ -67,7 +68,6 @@ export default function Navbar() {
                     animate={scrolled ? { scale: 0.8 } : { scale: 1 }}
                     className="flex flex-col items-center"
                 >
-                    {/* tracking-tighter joins text more as requested */}
                     <span className={`text-2xl md:text-3xl font-black tracking-tighter leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"} ${!useAdaptive && "text-shadow-premium"}`}>
                         PAPANTLA
                     </span>
@@ -94,11 +94,11 @@ export default function Navbar() {
             </button>
             <button 
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all text-foreground ${useAdaptive ? "bg-black/5 dark:bg-white/5" : "bg-white/10 text-white"}`}
+                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${useAdaptive ? "bg-black/5 dark:bg-white/5 text-foreground" : "bg-white/10 text-white"}`}
             >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {mounted && theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <button className={`w-9 h-9 rounded-full flex items-center justify-center transition-all text-foreground ${useAdaptive ? "bg-black/5 dark:bg-white/10" : "bg-white/10 text-white"}`}>
+            <button className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${useAdaptive ? "bg-black/5 dark:bg-white/10 text-foreground" : "bg-white/10 text-white"}`}>
               <User className="w-4 h-4" />
             </button>
           </div>
@@ -122,7 +122,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[70] bg-white/10 dark:bg-black/30 backdrop-blur-[40px] flex flex-col p-8 pt-32 lg:hidden"
+            className="fixed inset-0 z-[70] bg-white/95 dark:bg-black/95 backdrop-blur-[40px] flex flex-col p-8 pt-32 lg:hidden"
           >
             <div className="flex flex-col gap-8 overflow-y-auto no-scrollbar pb-10">
               {[
@@ -140,7 +140,6 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between py-1 group"
                 >
-                  {/* Minimalist font weight and tracking with Inter font */}
                   <span className={`text-5xl font-light tracking-tighter font-inter transition-all ${pathname === item.path ? "text-primary font-medium" : "text-foreground group-hover:text-primary"}`}>
                     {item.name}
                   </span>
@@ -157,7 +156,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center gap-2 p-5 bg-white/20 dark:bg-white/10 text-foreground border border-black/5 dark:border-white/5 rounded-[30px] font-black text-[9px] uppercase tracking-widest"
                 >
-                  Cerrar Menú
+                  Cerrar
                 </button>
             </div>
           </motion.div>
@@ -166,3 +165,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
