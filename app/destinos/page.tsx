@@ -5,6 +5,7 @@ import { Compass, Star, ChevronRight, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useMemo } from "react";
+import { fuzzyMatch } from "@/utils/search";
 
 const destinations = [
   {
@@ -63,9 +64,9 @@ export default function DestinosPage() {
 
   const filteredDestinations = useMemo(() => {
     return destinations.filter((dest) =>
-      dest.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dest.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dest.tag.toLowerCase().includes(searchQuery.toLowerCase())
+      fuzzyMatch(searchQuery, dest.title) ||
+      fuzzyMatch(searchQuery, dest.subtitle) ||
+      fuzzyMatch(searchQuery, dest.tag)
     );
   }, [searchQuery]);
 

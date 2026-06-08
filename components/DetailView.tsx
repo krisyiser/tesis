@@ -90,20 +90,24 @@ export default function DetailView({
       {/* Content Section */}
       <div className="px-8 flex flex-col gap-10 -mt-6 relative z-10 lg:max-w-4xl lg:mx-auto">
         
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Quick Stats - Centered and small */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {rating && (
-            <div className="bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-[30px] p-6 flex flex-col items-center gap-2 shadow-xl shadow-black/5">
-              <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
-              <span className="text-2xl font-black">{rating}</span>
-              <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">Valoración</span>
+            <div className="bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl p-3 px-5 flex items-center gap-3 shadow-xl backdrop-blur-md">
+              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <div className="flex flex-col">
+                <span className="text-sm font-black leading-none">{rating}</span>
+                <span className="text-[8px] text-muted-foreground font-black uppercase tracking-widest mt-0.5">Rating</span>
+              </div>
             </div>
           )}
           {details?.map((detail, i) => (
-            <div key={i} className="bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-[30px] p-6 flex flex-col items-center gap-2 shadow-xl shadow-black/5">
-              <detail.icon className="w-6 h-6 text-primary" />
-              <span className="text-xl font-black">{detail.value}</span>
-              <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">{detail.label}</span>
+            <div key={i} className="bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl p-3 px-5 flex items-center gap-3 shadow-xl backdrop-blur-md">
+              <detail.icon className="w-4 h-4 text-primary" />
+              <div className="flex flex-col">
+                <span className="text-sm font-black leading-none">{detail.value}</span>
+                <span className="text-[8px] text-muted-foreground font-black uppercase tracking-widest mt-0.5">{detail.label}</span>
+              </div>
             </div>
           ))}
         </div>

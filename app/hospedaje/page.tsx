@@ -5,6 +5,7 @@ import { Bed, Star, MapPin, Phone, Calendar, Search, ChevronRight } from "lucide
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useMemo } from "react";
+import { fuzzyMatch } from "@/utils/search";
 
 const hotels = [
   {
@@ -105,8 +106,8 @@ export default function HospedajePage() {
 
   const filteredHotels = useMemo(() => {
     return hotels.filter(hotel => 
-      hotel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      hotel.address.toLowerCase().includes(searchQuery.toLowerCase())
+      fuzzyMatch(searchQuery, hotel.name) ||
+      fuzzyMatch(searchQuery, hotel.address)
     );
   }, [searchQuery]);
 

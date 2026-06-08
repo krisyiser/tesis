@@ -111,7 +111,7 @@ export default function Navbar() {
         <div className="flex lg:hidden items-center">
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className={`p-2 rounded-full transition-all relative z-[100] ${isOpen ? "bg-primary text-white" : useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
+                className={`p-2 rounded-full transition-all relative z-[10001] ${isOpen ? "bg-primary text-white" : useAdaptive ? "text-foreground bg-black/5 dark:bg-white/10" : "text-white bg-white/10"}`}
             >
                 {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
