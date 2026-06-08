@@ -41,10 +41,12 @@ export default function Home() {
       {/* SECTION 1: HERO */}
       <section className="relative h-[100dvh] w-full overflow-hidden flex flex-col items-center justify-center text-center">
          <div className="absolute inset-0 z-0">
-            <img 
+            <Image 
                src={imgBPath} 
                alt="Papantla Hero" 
+               fill
                className="w-full h-full object-cover"
+               priority
             />
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
@@ -70,7 +72,7 @@ export default function Home() {
 
                <div className="flex items-center gap-4 mt-8">
                   <div className="w-2 h-2 bg-primary rotate-45" />
-                  <span className="text-white text-md md:text-2xl font-black uppercase tracking-widest italic drop-shadow-2xl">
+                  <span className="text-white text-md md:text-2xl font-black uppercase tracking-widest drop-shadow-2xl">
                      LA CIUDAD QUE PERFUMA
                   </span>
                   <div className="w-2 h-2 bg-primary rotate-45" />
@@ -158,8 +160,8 @@ export default function Home() {
                  <div className="flex flex-col gap-10">
                      <div className="flex flex-col gap-4">
                         <Landmark className="text-primary w-10 h-10" />
-                        <h3 className="text-5xl md:text-6xl font-black tracking-tight text-black dark:text-white italic">
-                            Historia & <span className="text-primary not-italic">Cultura</span>
+                        <h3 className="text-5xl md:text-6xl font-black tracking-tight text-black dark:text-white">
+                            Historia & <span className="text-primary">Cultura</span>
                         </h3>
                      </div>
                      <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">

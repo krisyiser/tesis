@@ -26,7 +26,7 @@ export default function BottomNavbar() {
               <div className={`p-2 rounded-xl transition-all duration-300 ${isActive ? "text-primary scale-125" : "text-foreground opacity-40 group-hover:text-primary group-hover:opacity-100"}`}>
                 <Icon className="w-5 h-5" />
               </div>
-              <span className={`text-[4.5px] font-black uppercase tracking-[0.1em] ${isActive ? "text-primary" : "text-foreground opacity-30"}`}>
+              <span className={`text-[7px] font-black uppercase tracking-[0.1em] ${isActive ? "text-primary" : "text-foreground opacity-30"}`}>
                 {item.name}
               </span>
               {isActive && (

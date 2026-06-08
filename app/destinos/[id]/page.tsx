@@ -9,7 +9,8 @@ export default function DestinoDetailPage() {
   const params = useParams();
   const id = params.id as string;
   
-  const found = tourismData.find(item => item.id === id);
+  const decodedId = decodeURIComponent(id);
+  const found = tourismData.find(item => item.id === decodedId);
   
   const data = found ? {
     ...found,
@@ -19,7 +20,7 @@ export default function DestinoDetailPage() {
     ],
     gallery: found.gallery || [found.imageUrl]
   } : {
-    title: id.replace(/-/g, ' '),
+    title: decodedId.replace(/-/g, ' '),
     subtitle: "Destino Turístico",
     description: "Información detallada sobre este destino próximamente. Papantla ofrece una riqueza cultural y natural inigualable que te espera para ser explorada.",
     imageUrl: "/destinos/tajin.jpg",

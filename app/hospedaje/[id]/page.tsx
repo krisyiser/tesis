@@ -9,7 +9,8 @@ export default function HotelDetailPage() {
   const params = useParams();
   const id = params.id as string;
   
-  const found = tourismData.find(item => item.id === id);
+  const decodedId = decodeURIComponent(id);
+  const found = tourismData.find(item => item.id === decodedId);
   
   const data = found ? {
     ...found,
@@ -19,7 +20,7 @@ export default function HotelDetailPage() {
     ],
     gallery: found.gallery || [found.imageUrl]
   } : {
-    title: id.replace(/-/g, ' '),
+    title: decodedId.replace(/-/g, ' '),
     subtitle: "Hospedaje de Calidad",
     description: "Este establecimiento ofrece todas las comodidades necesarias para una estancia placentera en Papantla. Disfruta de la calidez de nuestra gente y la belleza de nuestro pueblo mágico.",
     imageUrl: "/images/hotels/hotel_1.png",

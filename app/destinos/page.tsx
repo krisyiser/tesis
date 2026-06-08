@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Compass, Star, ChevronRight, Search } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const destinations = [
   {
@@ -67,7 +68,7 @@ export default function DestinosPage() {
               </div>
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Explorar</span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-foreground italic leading-none">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-foreground leading-none">
                 Destinos
             </h1>
         </div>
@@ -97,10 +98,11 @@ export default function DestinosPage() {
               className="group relative flex flex-col bg-white dark:bg-zinc-900 rounded-[40px] overflow-hidden border border-black/5 dark:border-white/5 shadow-2xl transition-all duration-500 hover:border-primary/30"
             >
              {/* Image container */}
-             <div className="aspect-[4/3] relative overflow-hidden">
-                <img 
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image 
                    src={dest.imageUrl} 
                    alt={dest.title} 
+                   fill
                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />

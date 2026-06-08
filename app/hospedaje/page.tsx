@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Bed, Star, MapPin, Phone, Calendar, ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const hotels = [
   {
@@ -110,7 +111,7 @@ export default function HospedajePage() {
           <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/5">
             <Bed className="w-6 h-6" />
           </div>
-          <h1 className="text-4xl font-black tracking-tighter text-foreground italic">Hospedaje</h1>
+          <h1 className="text-4xl font-black tracking-tighter text-foreground">Hospedaje</h1>
         </motion.div>
         <p className="text-muted-foreground font-medium leading-tight max-w-sm">
           Descubre los mejores rincones para descansar en Papantla, "La Ciudad que Perfuma el Mundo".
@@ -130,9 +131,10 @@ export default function HospedajePage() {
         >
               {/* Image Container */}
               <div className="aspect-[4/3] relative overflow-hidden">
-                <img 
+                <Image 
                   src={hotel.img} 
                   alt={hotel.name} 
+                  fill
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute top-5 right-5 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-2xl flex items-center gap-1.5 border border-white/20">

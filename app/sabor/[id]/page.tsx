@@ -9,7 +9,8 @@ export default function SaborDetailPage() {
   const params = useParams();
   const id = params.id as string;
   
-  const found = tourismData.find(item => item.id === id);
+  const decodedId = decodeURIComponent(id);
+  const found = tourismData.find(item => item.id === decodedId);
   
   const data = found ? {
     ...found,
@@ -19,7 +20,7 @@ export default function SaborDetailPage() {
     ],
     gallery: found.gallery || [found.imageUrl]
   } : {
-    title: id.replace(/-/g, ' '),
+    title: decodedId.replace(/-/g, ' '),
     subtitle: "Sabor Auténtico",
     description: "Descubre la explosión de sabores tradicionales en este rincón gastronómico de Papantla. Cada platillo cuenta una historia de tradición y cultura totonaca.",
     imageUrl: "/images/locals/traditional.png",

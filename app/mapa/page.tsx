@@ -35,8 +35,8 @@ export default function MapaPage() {
           <div className="flex-1 px-4 pointer-events-none">
              <div className="bg-white/95 dark:bg-black/95 backdrop-blur-xl border border-black/5 rounded-2xl px-6 py-3 shadow-2xl inline-flex items-center gap-3 ml-2 pointer-events-auto">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-ping" />
-                <h1 className="text-sm font-black tracking-tighter uppercase italic">
-                   Mapa <span className="text-primary not-italic">Live</span>
+                <h1 className="text-sm font-black tracking-tighter uppercase">
+                   Mapa <span className="text-primary font-black">Live</span>
                 </h1>
              </div>
           </div>

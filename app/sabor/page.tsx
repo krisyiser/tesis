@@ -188,7 +188,7 @@ function SaborContent() {
                 <div className="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center text-primary shadow-inner backdrop-blur-xl">
                   <Utensils className="w-8 h-8" />
                 </div>
-                <h1 className="text-4xl font-black tracking-tighter text-foreground mt-2 uppercase italic">Gastronomía</h1>
+                <h1 className="text-4xl font-black tracking-tighter text-foreground mt-2 uppercase">Gastronomía</h1>
               </div>
               <p className="text-gray-400 font-medium tracking-tight max-w-xs mx-auto text-[11px] leading-tight uppercase opacity-70">
                 Sabores ancestrales y el perfume de la vainilla en cada rincón de Papantla.
@@ -220,7 +220,7 @@ function SaborContent() {
                   <ChefHat className="w-7 h-7" />
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="text-foreground font-black text-xl tracking-tight italic">Sabores Papantecos</span>
+                  <span className="text-foreground font-black text-xl tracking-tight">Sabores Papantecos</span>
                   <span className="text-primary text-[10px] uppercase font-black tracking-[0.2em] mt-1">Restaurantes de Tradición</span>
                 </div>
                 <ChevronRight className="ml-auto text-primary group-hover:translate-x-1 transition-transform" />
@@ -235,7 +235,7 @@ function SaborContent() {
                   <Pizza className="w-7 h-7" />
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="font-black text-xl tracking-tight italic">Alimentos y bebidas</span>
+                  <span className="font-black text-xl tracking-tight">Alimentos y bebidas</span>
                   <span className="text-gray-400 text-[10px] uppercase font-black tracking-[0.2em] mt-1">Directorio de Negocios</span>
                 </div>
                 <ChevronRight className="ml-auto text-gray-400 group-hover:translate-x-1 transition-transform" />
@@ -257,7 +257,7 @@ function SaborContent() {
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
-              <h1 className="text-4xl font-black tracking-tighter text-foreground italic uppercase">Sabores Papantecos</h1>
+              <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Sabores Papantecos</h1>
               <p className="text-gray-400 font-bold tracking-tight text-[11px] uppercase opacity-60">Especialidades locales que preservan el legado Totonaca.</p>
             </header>
 
@@ -280,7 +280,7 @@ function SaborContent() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                       <div className="absolute bottom-4 left-5 right-5">
-                        <h3 className="font-black text-xl tracking-tight text-white mb-1 group-hover:text-primary transition-colors italic">{resto.name}</h3>
+                        <h3 className="font-black text-xl tracking-tight text-white mb-1 group-hover:text-primary transition-colors">{resto.name}</h3>
                         <div className="flex items-start gap-1.5 text-white/70 text-[10px]">
                           <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
                           <span className="line-clamp-1 leading-relaxed font-bold">{resto.address}</span>
@@ -323,7 +323,7 @@ function SaborContent() {
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
-              <h1 className="text-4xl font-black tracking-tighter text-foreground italic uppercase">Alimentos y Bebidas</h1>
+              <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Alimentos y Bebidas</h1>
               <p className="text-gray-400 font-bold tracking-tight text-[11px] uppercase opacity-60">Directorio completo de delicias gastronómicas.</p>
             </header>
 
@@ -370,7 +370,7 @@ function SaborContent() {
                         ))}
                       </div>
                       <div className="absolute bottom-4 left-5 right-5">
-                        <h3 className="font-black text-xl tracking-tight text-white mb-1 line-clamp-1 group-hover:text-primary transition-colors italic">{biz.name}</h3>
+                        <h3 className="font-black text-xl tracking-tight text-white mb-1 line-clamp-1 group-hover:text-primary transition-colors">{biz.name}</h3>
                         <div className="flex items-start gap-1.5 text-white/70 text-[9px] font-bold">
                           <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
                           <span className="line-clamp-1">{biz.address}</span>

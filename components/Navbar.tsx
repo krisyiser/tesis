@@ -32,7 +32,7 @@ export default function Navbar() {
   const useAdaptive = !isHome || scrolled;
 
   const navItemClass = (path: string) => `
-    text-[9px] font-black uppercase tracking-[0.2em] transition-all relative group
+    text-[11px] font-black uppercase tracking-[0.15em] transition-all relative group
     ${pathname === path ? "text-primary" : useAdaptive ? "text-foreground" : "text-white"}
     hover:text-primary dark:hover:text-primary
   `;
@@ -79,7 +79,7 @@ export default function Navbar() {
                     </span>
                     <div className="flex items-center gap-1 mt-0.5 opacity-80">
                       <div className="h-[1px] w-1.5 bg-primary/40" />
-                      <span className="text-[5px] font-bold text-primary uppercase tracking-[0.15em] italic">La Ciudad que Perfuma</span>
+                      <span className="text-[6px] font-bold text-primary uppercase tracking-[0.12em]">La Ciudad que Perfuma</span>
                       <div className="h-[1px] w-1.5 bg-primary/40" />
                     </div>
                 </motion.div>
@@ -142,7 +142,7 @@ export default function Navbar() {
                     href={item.path} 
                     className="flex items-center justify-between py-3 group border-b border-black/5 dark:border-white/5 last:border-0"
                   >
-                    <span className={`text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${pathname === item.path ? "text-primary px-3" : "text-foreground opacity-70 group-active:text-primary group-active:opacity-100"}`}>
+                    <span className={`text-[13px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${pathname === item.path ? "text-primary px-3" : "text-foreground opacity-70 group-active:text-primary group-active:opacity-100"}`}>
                       {item.name}
                     </span>
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${pathname === item.path ? "bg-primary text-white" : "bg-black/5 dark:bg-white/5"}`}>
@@ -153,12 +153,12 @@ export default function Navbar() {
               </div>
 
               <div className="mt-auto pt-6 border-t border-black/5 dark:border-white/5 grid grid-cols-2 gap-4">
-                  <button className="flex items-center justify-center gap-2 p-4 bg-primary text-white rounded-[24px] font-black text-[8px] uppercase tracking-widest shadow-lg shadow-primary/20">
+                  <button className="flex items-center justify-center gap-2 p-4 bg-primary text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20">
                      <User className="w-4 h-4" /> Perfil
                   </button>
                   <button 
                     onClick={() => setIsOpen(false)}
-                    className="flex-1 flex items-center justify-center gap-2 p-4 bg-white/20 dark:bg-white/5 backdrop-blur-md text-foreground border border-black/5 dark:border-white/10 rounded-[24px] font-black text-[8px] uppercase tracking-widest"
+                    className="flex-1 flex items-center justify-center gap-2 p-4 bg-white/20 dark:bg-white/5 backdrop-blur-md text-foreground border border-black/5 dark:border-white/10 rounded-[24px] font-black text-[10px] uppercase tracking-widest"
                   >
                     Cerrar
                   </button>

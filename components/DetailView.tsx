@@ -40,9 +40,10 @@ export default function DetailView({
           transition={{ duration: 1.5 }}
           className="w-full h-full"
         >
-          <img 
+          <Image 
             src={imageUrl} 
             alt={title} 
+            fill
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -76,7 +77,7 @@ export default function DetailView({
                 {tag}
               </span>
             )}
-            <h1 className="text-5xl md:text-7xl font-black text-foreground tracking-tighter leading-none italic uppercase">
+            <h1 className="text-5xl md:text-7xl font-black text-foreground tracking-tighter leading-none uppercase">
               {title}
             </h1>
             <p className="text-muted-foreground font-bold tracking-widest uppercase text-[10px]">
@@ -129,7 +130,7 @@ export default function DetailView({
                   whileHover={{ scale: 1.02 }}
                   className="aspect-square relative rounded-[30px] overflow-hidden border border-black/5 dark:border-white/5 shadow-xl"
                 >
-                  <img src={img} alt={`Gallery ${i}`} className="w-full h-full object-cover" />
+                  <Image src={img} alt={`Gallery ${i}`} fill className="w-full h-full object-cover" />
                 </motion.div>
               ))}
             </div>
