@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -29,7 +29,7 @@ export default function LoginPage() {
               <div className="h-[2px] w-0 group-hover:w-full bg-primary transition-all duration-300" />
             </Link>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
-              {isLogin ? "¡Hola de nuevo!" : "Crea tu cuenta"}
+              {isLogin ? "Â¡Hola de nuevo!" : "Crea tu cuenta"}
             </h2>
             <p className="text-sm text-gray-400 mt-2">
               {isLogin ? "Accede a tu perfil de viajero" : "Empieza tu aventura en la ciudad sagrada"}
@@ -69,7 +69,7 @@ export default function LoginPage() {
             {isLogin && (
               <div className="text-right">
                 <button type="button" className="text-[10px] font-black uppercase tracking-widest text-[#1A1A1A] dark:text-gray-400 hover:text-primary transition-colors">
-                  ¿Olvidaste tu contraseña?
+                  Â¿Olvidaste tu contraseña?
                 </button>
               </div>
             )}
@@ -98,7 +98,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-8 text-center text-xs text-gray-500 font-medium">
-            {isLogin ? "¿No tienes cuenta? " : "¿Ya tienes cuenta? "}
+            {isLogin ? "Â¿No tienes cuenta? " : "Â¿Ya tienes cuenta? "}
             <button 
               onClick={() => setIsLogin(!isLogin)}
               className="text-primary font-black hover:underline underline-offset-4"

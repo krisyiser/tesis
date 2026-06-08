@@ -43,8 +43,8 @@ export default function Navbar() {
     <nav 
       className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ${
         scrolled 
-          ? "bg-white/80 dark:bg-black/80 backdrop-blur-3xl py-3 shadow-2xl border-b border-black/5 dark:border-white/5" 
-          : isHome ? "bg-transparent py-6" : "bg-white/95 dark:bg-black/95 backdrop-blur-xl py-3 border-b border-black/5 dark:border-white/5 shadow-lg shadow-black/5"
+          ? "bg-white/10 dark:bg-black/10 backdrop-blur-[24px] py-3 shadow-2xl border-b border-white/20 dark:border-white/10" 
+          : isHome ? "bg-transparent py-6" : "bg-white/40 dark:bg-black/40 backdrop-blur-xl py-3 border-b border-black/5 dark:border-white/10 shadow-lg shadow-black/5"
       }`}
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between relative">
@@ -74,13 +74,13 @@ export default function Navbar() {
                     animate={scrolled ? { scale: 0.85 } : { scale: 1 }}
                     className="flex flex-col items-center"
                 >
-                    <span className={`text-xl md:text-2xl font-black tracking-tighter leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"}`}>
+                    <span className={`text-lg md:text-xl font-black tracking-tighter leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"}`}>
                         PAPANTLA
                     </span>
-                    <div className="flex items-center gap-1 mt-0.5">
-                      <div className="h-[1px] w-2 bg-primary/40" />
-                      <span className="text-[6px] font-bold text-primary uppercase tracking-[0.2em] italic">La Ciudad que Perfuma</span>
-                      <div className="h-[1px] w-2 bg-primary/40" />
+                    <div className="flex items-center gap-1 mt-0.5 opacity-80">
+                      <div className="h-[1px] w-1.5 bg-primary/40" />
+                      <span className="text-[5px] font-bold text-primary uppercase tracking-[0.15em] italic">La Ciudad que Perfuma</span>
+                      <div className="h-[1px] w-1.5 bg-primary/40" />
                     </div>
                 </motion.div>
             </Link>
@@ -118,7 +118,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU OVERLAY - Floating Window Design */}
       <AnimatePresence>
         {isOpen && (
           <div className="fixed inset-0 z-[80] p-4 pt-24 pb-32">
@@ -126,9 +125,9 @@ export default function Navbar() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="w-full h-full bg-white/90 dark:bg-black/90 backdrop-blur-[50px] rounded-[40px] shadow-2xl border border-white/20 overflow-hidden flex flex-col p-8"
+              className="w-full h-full bg-white/5 dark:bg-white/5 backdrop-blur-[32px] saturate-[180%] rounded-[40px] shadow-2xl border border-white/20 dark:border-white/10 overflow-hidden flex flex-col p-8"
             >
-              <div className="flex flex-col gap-6 overflow-y-auto no-scrollbar py-6">
+              <div className="flex flex-col gap-4 overflow-y-auto no-scrollbar py-6">
                 {[
                   { name: "Inicio", path: "/" },
                   { name: "Destinos", path: "/destinos" },
@@ -141,9 +140,9 @@ export default function Navbar() {
                   <Link 
                     key={item.path} 
                     href={item.path} 
-                    className="flex items-center justify-between py-2 group"
+                    className="flex items-center justify-between py-3 group border-b border-black/5 dark:border-white/5 last:border-0"
                   >
-                    <span className={`text-4xl font-light tracking-tighter transition-all duration-300 ${pathname === item.path ? "text-primary font-bold" : "text-foreground group-active:text-primary"}`}>
+                    <span className={`text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${pathname === item.path ? "text-primary px-3" : "text-foreground opacity-70 group-active:text-primary group-active:opacity-100"}`}>
                       {item.name}
                     </span>
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${pathname === item.path ? "bg-primary text-white" : "bg-black/5 dark:bg-white/5"}`}>
@@ -154,12 +153,12 @@ export default function Navbar() {
               </div>
 
               <div className="mt-auto pt-6 border-t border-black/5 dark:border-white/5 grid grid-cols-2 gap-4">
-                  <button className="flex items-center justify-center gap-2 p-4 bg-primary text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20">
+                  <button className="flex items-center justify-center gap-2 p-4 bg-primary text-white rounded-[24px] font-black text-[8px] uppercase tracking-widest shadow-lg shadow-primary/20">
                      <User className="w-4 h-4" /> Perfil
                   </button>
                   <button 
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center gap-2 p-4 bg-white dark:bg-white/5 text-foreground border border-black/5 dark:border-white/5 rounded-[24px] font-black text-[10px] uppercase tracking-widest"
+                    className="flex-1 flex items-center justify-center gap-2 p-4 bg-white/20 dark:bg-white/5 backdrop-blur-md text-foreground border border-black/5 dark:border-white/10 rounded-[24px] font-black text-[8px] uppercase tracking-widest"
                   >
                     Cerrar
                   </button>
