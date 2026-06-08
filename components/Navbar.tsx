@@ -41,7 +41,7 @@ export default function Navbar() {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ${
+      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-700 ${
         scrolled 
           ? "bg-white/10 dark:bg-black/10 backdrop-blur-[24px] py-3 shadow-2xl border-b border-white/20 dark:border-white/10" 
           : isHome ? "bg-transparent py-6" : "bg-white/40 dark:bg-black/40 backdrop-blur-xl py-3 border-b border-black/5 dark:border-white/10 shadow-lg shadow-black/5"
@@ -74,12 +74,12 @@ export default function Navbar() {
                     animate={scrolled ? { scale: 0.85 } : { scale: 1 }}
                     className="flex flex-col items-center"
                 >
-                    <span className={`text-lg md:text-xl font-black tracking-tighter leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"}`}>
+                    <span className={`text-2xl md:text-3xl font-black tracking-tighter leading-none text-center transition-colors duration-500 ${useAdaptive ? "text-foreground" : "text-white"}`}>
                         PAPANTLA
                     </span>
                     <div className="flex items-center gap-1 mt-0.5 opacity-80">
                       <div className="h-[1px] w-1.5 bg-primary/40" />
-                      <span className="text-[6px] font-bold text-primary uppercase tracking-[0.12em]">La Ciudad que Perfuma</span>
+                      <span className="text-[10px] font-bold text-primary uppercase tracking-[0.12em]">La Ciudad que Perfuma</span>
                       <div className="h-[1px] w-1.5 bg-primary/40" />
                     </div>
                 </motion.div>
@@ -120,7 +120,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-[80] p-4 pt-24 pb-32">
+          <div className="fixed inset-0 z-[10000] p-4 pt-24 pb-32">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}

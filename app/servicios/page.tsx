@@ -1,98 +1,136 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase, Phone, Map, Bus, Car, Users, ChevronRight, PhoneCall } from "lucide-react";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Briefcase, Phone, Map, Bus, Car, Users, ChevronRight, PhoneCall, Search, Smartphone } from "lucide-react";
+import { useState, useMemo } from "react";
+
+const services = [
+  {
+    category: "Guía Turística",
+    items: [
+      {
+        name: "Ana Victoria Xochitl",
+        sub: "Guía General y Cultural",
+        description: "Expertos certificados por SECTUR con conocimiento profundo de la historia Totonaca y arqueología del Tajín",
+        image: "https://i.pravatar.cc/150?u=guides",
+        type: "guide"
+      }
+    ]
+  },
+  {
+    category: "Transporte",
+    items: [
+      {
+        name: "Radio Taxi Papantla",
+        sub: "Servicio 24 horas",
+        description: "Transporte seguro y confiable dentro y fuera de la ciudad",
+        icon: PhoneCall,
+        type: "taxi",
+        phone: "7848420000"
+      },
+      {
+        name: "ADO Autobuses",
+        sub: "Viajes Foráneos",
+        description: "Conexiones principales a Poza Rica Veracruz y Ciudad de México",
+        icon: Bus,
+        type: "bus"
+      }
+    ]
+  }
+];
 
 export default function ServiciosPage() {
-  const [showTransport, setShowTransport] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showTransport, setShowTransport] = useState(true);
+
+  const filteredServices = useMemo(() => {
+    if (!searchQuery) return services;
+    return services.map(section => ({
+      ...section,
+      items: section.items.filter(item => 
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        section.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    })).filter(section => section.items.length > 0);
+  }, [searchQuery]);
 
   return (
     <div className="pb-32 flex flex-col bg-background min-h-screen">
-      <header className="px-6 pt-32 pb-10 flex flex-col gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
-            <Briefcase className="w-6 h-6" />
+      <header className="px-6 pt-32 pb-10 flex flex-col gap-6">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary shadow-lg shadow-secondary/5">
+            <Briefcase className="w-7 h-7" />
           </div>
-          <h1 className="text-3xl font-black tracking-tighter text-foreground">Servicios</h1>
+          <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Servicios</h1>
         </div>
-        <p className="text-gray-400 font-medium tracking-tight">Atención y calidad para que solo te preocupes de disfrutar.</p>
+
+        <div className="relative group">
+          <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-secondary transition-colors" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Buscar guías transporte o atención..."
+            className="w-full bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-[30px] py-6 pl-16 pr-8 text-sm font-bold focus:ring-4 focus:ring-secondary/10 outline-none transition-all shadow-sm"
+          />
+        </div>
+
+        <p className="text-gray-400 font-bold tracking-tight uppercase text-[10px] opacity-60">Atención y calidad para que solo te preocupes de disfrutar</p>
       </header>
 
       <div className="px-6 flex flex-col gap-10">
-        {/* GUÍA TURÍSTICA */}
-        <section className="flex flex-col gap-6">
-          <div className="flex items-center justify-between">
-             <h2 className="text-lg font-bold tracking-tight">Guía Turística</h2>
-             <span className="text-[10px] text-primary font-bold uppercase tracking-widest">Certificados</span>
-          </div>
-          <div className="bg-white/80 dark:bg-white/5 p-6 rounded-4xl border border-black/5 flex flex-col gap-6 shadow-sm">
-             <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-gray-100 overflow-hidden">
-                   <img src="https://i.pravatar.cc/150?u=guides" alt="Guía" className="w-full h-full object-cover" />
-                </div>
-                <div className="flex flex-col">
-                   <span className="font-bold">Ana Victoria Xochitl</span>
-                   <span className="text-xs text-gray-400">Guía General y Cultural</span>
-                </div>
-             </div>
-             <p className="text-sm text-gray-500 font-medium leading-relaxed">
-                Expertos certificados por SECTUR con conocimiento profundo de la historia Totonaca y arqueología del Tajín.
-             </p>
-             <motion.button 
-                whileTap={{ scale: 0.97 }}
-                className="w-full py-3 bg-secondary text-white rounded-2xl font-bold uppercase text-[10px] tracking-widest"
-             >
-                Contactar Guía
-             </motion.button>
-          </div>
-        </section>
+        <AnimatePresence>
+          {filteredServices.map((section, idx) => (
+            <motion.section 
+              layout
+              key={section.category}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex flex-col gap-6"
+            >
+              <div className="flex items-center justify-between">
+                 <h2 className="text-xl font-black tracking-tight uppercase">{section.category}</h2>
+                 <span className="text-[9px] text-secondary font-black uppercase tracking-widest bg-secondary/10 px-3 py-1 rounded-full">Verificados</span>
+              </div>
 
-        {/* TRANSPORTE BUTTONS */}
-        <section className="flex flex-col gap-6">
-           <h2 className="text-lg font-bold tracking-tight">Transporte</h2>
-           <div className="flex flex-col gap-3">
-              <motion.button 
-                onClick={() => setShowTransport(!showTransport)}
-                whileTap={{ scale: 0.98 }}
-                className="bg-primary p-6 rounded-4xl flex items-center justify-between shadow-2xl shadow-primary/20 text-white"
-              >
-                 <div className="flex items-center gap-4">
-                    <Car className="w-6 h-6" />
-                    <span className="font-black text-lg tracking-tight">Transporte Local</span>
-                 </div>
-                 <ChevronRight className={`transition-transform duration-300 ${showTransport ? 'rotate-90' : ''}`} />
-              </motion.button>
-
-              {showTransport && (
-                 <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col gap-3 mt-2"
-                 >
-                    <div className="flex gap-3">
-                       <button className="flex-1 bg-white dark:bg-white/5 p-4 rounded-3xl border border-black/5 flex flex-col items-center gap-2 shadow-sm text-center">
-                          <Map className="w-5 h-5 text-gray-400" />
-                          <span className="text-[10px] font-bold uppercase tracking-tight">Ubicación Bases</span>
-                       </button>
-                       <button className="flex-1 bg-white dark:bg-white/5 p-4 rounded-3xl border border-black/5 flex flex-col items-center gap-2 shadow-sm text-center">
-                          <PhoneCall className="w-5 h-5 text-green-500" />
-                          <span className="text-[10px] font-bold uppercase tracking-tight">Radio Taxi</span>
-                       </button>
+              <div className="grid grid-cols-1 gap-4">
+                {section.items.map((item, i) => (
+                  <motion.div
+                    key={item.name}
+                    className="bg-white dark:bg-white/5 p-6 rounded-[32px] border border-black/5 dark:border-white/10 flex flex-col gap-6 shadow-xl"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-white/10 overflow-hidden relative">
+                        {'image' in item && item.image ? (
+                          <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-secondary">
+                            {'icon' in item && item.icon && <item.icon className="w-8 h-8" />}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-black text-lg tracking-tight">{item.name}</span>
+                        <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{item.sub}</span>
+                      </div>
                     </div>
-                    <button className="bg-white dark:bg-white/5 p-5 rounded-3xl border border-black/5 flex items-center gap-4 shadow-sm">
-                       <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white">
-                          <Bus className="w-5 h-5" />
-                       </div>
-                       <div className="flex flex-col items-start">
-                          <span className="font-bold text-sm tracking-tight text-foreground">ADO Autobuses</span>
-                          <span className="text-[10px] text-gray-400 font-bold tracking-widest">Horarios y Salidas</span>
-                       </div>
-                    </button>
-                 </motion.div>
-              )}
-           </div>
-        </section>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
+                      {item.description}
+                    </p>
+                    <motion.button 
+                      whileTap={{ scale: 0.97 }}
+                      className="w-full py-4 bg-secondary text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-secondary/20 flex items-center justify-center gap-2"
+                    >
+                      <Smartphone className="w-4 h-4" />
+                      Contactar ahora
+                    </motion.button>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   );

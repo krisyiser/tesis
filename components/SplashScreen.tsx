@@ -23,7 +23,7 @@ export default function SplashScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.5 }}
-          className="fixed inset-0 z-[1001] flex flex-col items-center justify-center bg-white dark:bg-black transition-colors duration-700"
+          className="fixed inset-0 z-[20000] flex flex-col items-center justify-center bg-white dark:bg-black transition-colors duration-700"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -70,7 +70,7 @@ export default function SplashScreen() {
                    className="flex items-center gap-4 w-full"
                 >
                    <div className="h-[1px] flex-1 bg-primary/20" />
-                   <p className="text-primary font-black uppercase text-[11px] tracking-[0.4em] italic whitespace-nowrap">
+                   <p className="text-primary font-black uppercase text-[11px] tracking-[0.4em] whitespace-nowrap">
                       La Ciudad que Perfuma
                    </p>
                    <div className="h-[1px] flex-1 bg-primary/20" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useRouter } from "next/navigation";
 import IOSCard from "@/components/IOSCard";
@@ -13,6 +13,7 @@ import {
   Phone, 
   ArrowLeft,
   Flame,
+  Search,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -143,6 +144,7 @@ function SaborContent() {
   const router = useRouter();
   const activeSection = (searchParams.get("section") as "menu" | "sabores" | "alimentos") || "menu";
   const selectedCategory = searchParams.get("category") || "Todos";
+  const [searchQuery, setSearchQuery] = useState("");
 
   const setSection = (section: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -160,9 +162,21 @@ function SaborContent() {
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
-  const filteredBusinesses = foodBusinesses.filter(biz => 
-    selectedCategory === "Todos" || biz.categories.includes(selectedCategory)
-  );
+  const filteredTraditional = useMemo(() => {
+    return traditionalRestaurants.filter(resto => 
+      resto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resto.address.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery]);
+
+  const filteredBusinesses = useMemo(() => {
+    return foodBusinesses.filter(biz => {
+      const matchesCategory = selectedCategory === "Todos" || biz.categories.includes(selectedCategory);
+      const matchesSearch = biz.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                           biz.address.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
 
   const openMap = (url: string) => {
     window.open(url, "_blank");
@@ -251,23 +265,38 @@ function SaborContent() {
             className="px-6"
           >
             <header className="pt-20 pb-8 flex flex-col gap-4">
-              <button 
-                onClick={() => setSection("menu")}
-                className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-all mb-4"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </button>
-              <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Sabores Papantecos</h1>
-              <p className="text-gray-400 font-bold tracking-tight text-[11px] uppercase opacity-60">Especialidades locales que preservan el legado Totonaca.</p>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => { setSection("menu"); setSearchQuery(""); }}
+                  className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-all"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                </button>
+                <div className="relative flex-1 group">
+                  <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Buscar restaurante..."
+                    className="w-full bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-[24px] py-4 pl-14 pr-6 text-sm font-bold focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                  />
+                </div>
+              </div>
+              <div className="mt-4">
+                <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Sabores Papantecos</h1>
+                <p className="text-gray-400 font-bold tracking-tight text-[11px] uppercase opacity-60">Especialidades locales que preservan el legado Totonaca.</p>
+              </div>
             </header>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 pb-10">
-              {traditionalRestaurants.map((resto, i) => (
+              {filteredTraditional.map((resto, i) => (
                 <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  layout
+                  key={resto.name} 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
                   className="bg-white/5 dark:bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[32px] flex flex-col overflow-hidden shadow-lg group hover:border-primary/30 transition-all"
                 >
                   <Link href={`/sabor/${resto.name.toLowerCase().replace(/\s+/g, '-')}`}>
@@ -317,14 +346,28 @@ function SaborContent() {
             className="px-6"
           >
             <header className="pt-20 pb-8 flex flex-col gap-4">
-              <button 
-                onClick={() => setSection("menu")}
-                className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-all mb-4"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </button>
-              <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Alimentos y Bebidas</h1>
-              <p className="text-gray-400 font-bold tracking-tight text-[11px] uppercase opacity-60">Directorio completo de delicias gastronómicas.</p>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => { setSection("menu"); setSearchQuery(""); }}
+                  className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-all"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                </button>
+                <div className="relative flex-1 group">
+                  <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Buscar negocio..."
+                    className="w-full bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-[24px] py-4 pl-14 pr-6 text-sm font-bold focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                  />
+                </div>
+              </div>
+              <div className="mt-4">
+                <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Alimentos y Bebidas</h1>
+                <p className="text-gray-400 font-bold tracking-tight text-[11px] uppercase opacity-60">Directorio completo de delicias gastronómicas.</p>
+              </div>
             </header>
 
             {/* CATEGORIES SCROLL */}
@@ -347,10 +390,10 @@ function SaborContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
               {filteredBusinesses.map((biz, i) => (
                 <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  layout
+                  key={biz.name} 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   className="bg-white/5 dark:bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[32px] flex flex-col overflow-hidden shadow-lg group hover:border-primary/30 transition-all"
                 >
                   <Link href={`/sabor/${biz.name.toLowerCase().replace(/\s+/g, '-')}`}>

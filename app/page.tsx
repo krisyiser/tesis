@@ -1,39 +1,49 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Sparkles, MapPin, ArrowDown, Landmark, Info, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useMemo } from "react";
 
 const exploreItems = [
   {
     title: "Zona Arqueológica del Tajín",
     subtitle: "Ciudad Trueno",
-    desc: "Capital del imperio Totonaca, famosa por su Pirámide de los Nichos.",
+    desc: "Capital del imperio Totonaca famosa por su Pirámide de los Nichos",
     img: "/tajin.jpg",
   },
   {
     title: "Centro Histórico",
     subtitle: "Corazón del Pueblo",
-    desc: "Arquitectura vernácula y el aroma de la vainilla en cada esquina.",
+    desc: "Arquitectura vernácula y el aroma de la vainilla en cada esquina",
     img: "/centro.jpg",
   },
   {
     title: "Monumento al Volador",
     subtitle: "Símbolo de Papantla",
-    desc: "Homenaje al ritual ancestral que desafía las alturas.",
+    desc: "Homenaje al ritual ancestral que desafía las alturas",
     img: "/volador.jpg",
   },
   {
     title: "Mural a la Cultura Totonaca",
     subtitle: "Historia en Piedra",
-    desc: "La cosmogonía de un pueblo grabada para la eternidad.",
+    desc: "La cosmogonía de un pueblo grabada para la eternidad",
     img: "/mural.jpg",
   },
 ];
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
   const imgBPath = "/hero-b-background.jpg";
+
+  const filteredExplore = useMemo(() => {
+    return exploreItems.filter(item => 
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.desc.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery]);
 
   return (
     <div className="flex flex-col bg-white dark:bg-black transition-colors duration-500">
@@ -65,8 +75,7 @@ export default function Home() {
                   <div className="h-[1px] w-8 bg-white/40" />
                </div>
 
-               {/* SIZE ADJUSTED FOR MOBILE: text-6xl for mobile, text-[12rem] for desktop */}
-               <h1 className="text-6xl md:text-8xl lg:text-[12rem] font-black text-white leading-[0.8] tracking-tighter">
+               <h1 className="text-6xl md:text-8xl lg:text-[12rem] font-black text-white leading-[0.8] tracking-tighter uppercase">
                   PAPANTLA
                </h1>
 
@@ -99,31 +108,35 @@ export default function Home() {
       <section id="explore" className="py-24 px-6 bg-gray-50 dark:bg-[#050505]">
           <div className="max-w-[1400px] mx-auto flex flex-col gap-16">
              
-             {/* SEARCH BANNER (INICIO DE SECCIÓN 2) */}
+             {/* SEARCH BANNER (PREDICTIVE SEARCH) */}
              <motion.div 
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
-               className="relative w-full max-w-3xl mx-auto mb-8"
+               className="relative w-full max-w-3xl mx-auto mb-8 group"
              >
                 <div className="absolute inset-y-0 left-6 flex items-center">
-                    <Search className="w-5 h-5 text-gray-400" />
+                    <Search className="w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
                 </div>
                 <input 
                     type="text" 
-                    placeholder="Buscador de Papantla..."
-                    className="w-full py-6 pl-16 pr-8 bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-[30px] font-bold text-foreground text-sm focus:ring-4 focus:ring-primary/10 transition-all outline-none"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Busca destinos historia o cultura..."
+                    className="w-full py-6 pl-16 pr-8 bg-white dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-[30px] font-bold text-foreground text-sm focus:ring-4 focus:ring-primary/10 transition-all outline-none shadow-xl"
                 />
              </motion.div>
 
              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                 {exploreItems.map((item, i) => (
+                <AnimatePresence>
+                  {filteredExplore.map((item, i) => (
                     <motion.div
-                       key={i}
+                       layout
+                       key={item.title}
                        initial={{ opacity: 0, scale: 0.9 }}
-                       whileInView={{ opacity: 1, scale: 1 }}
-                       viewport={{ once: true }}
-                       transition={{ delay: i * 0.1 }}
+                       animate={{ opacity: 1, scale: 1 }}
+                       exit={{ opacity: 0, scale: 0.9 }}
+                       transition={{ duration: 0.4 }}
                        className="group relative h-[500px] rounded-[50px] overflow-hidden shadow-2xl"
                     >
                         <Image 
@@ -133,42 +146,44 @@ export default function Home() {
                            className="object-cover transition-transform duration-1000 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                        <div className="absolute bottom-12 left-10 right-10">
+                        <div className="absolute bottom-12 left-10 right-10 text-left">
                            <span className="text-primary font-black uppercase text-[10px] tracking-[0.3em] mb-4 block">
                               {item.subtitle}
                            </span>
-                           <h3 className="text-4xl font-black text-white leading-none tracking-tight mb-4">
+                           <h3 className="text-4xl font-black text-white leading-none tracking-tight mb-4 uppercase">
                               {item.title}
                            </h3>
                            <p className="text-white/60 text-sm font-medium leading-relaxed max-w-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                               {item.desc}
                            </p>
-                           <button className="flex items-center gap-3 text-white font-black text-[10px] uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full hover:bg-primary transition-all">
-                              Ver Detalle <ChevronRight className="w-4 h-4" />
-                           </button>
+                           <Link href={`/destinos`}>
+                            <button className="flex items-center gap-3 text-white font-black text-[10px] uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full hover:bg-primary transition-all">
+                                Ver Detalle <ChevronRight className="w-4 h-4" />
+                            </button>
+                           </Link>
                         </div>
                     </motion.div>
-                 ))}
+                  ))}
+                </AnimatePresence>
              </div>
           </div>
       </section>
 
       {/* SECTION 3: HISTORIA Y CULTURA */}
       <section className="py-32 px-6 bg-white dark:bg-black">
-          <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
+          <div className="max-w-[1400px] mx-auto flex flex-col gap-20 text-left">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
                  <div className="flex flex-col gap-10">
                      <div className="flex flex-col gap-4">
                         <Landmark className="text-primary w-10 h-10" />
-                        <h3 className="text-5xl md:text-6xl font-black tracking-tight text-black dark:text-white">
+                        <h3 className="text-5xl md:text-6xl font-black tracking-tight text-black dark:text-white uppercase">
                             Historia & <span className="text-primary">Cultura</span>
                         </h3>
                      </div>
                      <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
-                        Papantla es un crisol de tradiciones milenarias. Descubre los recintos que resguardan el legado Totonaca y el arte que nace de la tierra.
+                        Papantla es un crisol de tradiciones milenarias Descubre los recintos que resguardan el legado Totonaca y el arte que nace de la tierra
                      </p>
                      
-                     {/* MUSEUM BANNER */}
                      <motion.div 
                         whileHover={{ y: -10 }}
                         className="bg-gray-100 dark:bg-white/5 p-8 rounded-[40px] border border-black/5 dark:border-white/5 flex flex-col gap-6"
@@ -177,10 +192,10 @@ export default function Home() {
                             <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
                                <Landmark className="w-6 h-6" />
                             </div>
-                            <h4 className="text-2xl font-black text-black dark:text-white tracking-tight">Museo Teodoro Cano</h4>
+                            <h4 className="text-2xl font-black text-black dark:text-white tracking-tight uppercase">Museo Teodoro Cano</h4>
                         </div>
                         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                            Resguarda la obra monumental del maestro Teodoro Cano, capturando la esencia espiritual y cotidiana de la cultura Totonaca.
+                            Resguarda la obra monumental del maestro Teodoro Cano capturando la esencia espiritual y cotidiana de la cultura Totonaca
                         </p>
                         <button className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl hover:bg-primary dark:hover:bg-primary hover:text-white transition-all shadow-lg">
                             Página de Información
