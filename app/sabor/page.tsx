@@ -118,6 +118,7 @@ function SaborContent() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const setSection = (section: string) => {
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
     const params = new URLSearchParams(searchParams.toString());
     if (section === "menu") {
       params.delete("section");
@@ -249,7 +250,7 @@ function SaborContent() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Buscar restaurante (Fuzzy)..."
+                    placeholder="Buscar restaurante"
                     className="w-full bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-[24px] py-4 pl-14 pr-12 text-sm font-bold focus:ring-4 focus:ring-primary/10 outline-none transition-all shadow-sm"
                   />
                   {searchQuery && (
@@ -336,7 +337,7 @@ function SaborContent() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Buscar negocio (Fuzzy)..."
+                    placeholder="Buscar negocio"
                     className="w-full bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-[24px] py-4 pl-14 pr-12 text-sm font-bold focus:ring-4 focus:ring-primary/10 outline-none transition-all shadow-sm"
                   />
                   {searchQuery && (
