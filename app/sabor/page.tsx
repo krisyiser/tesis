@@ -31,45 +31,73 @@ const traditionalMenu = [
 const traditionalRestaurants = [
   {
     name: "Restaurante Nakú",
-    address: "Heroico Colegio Militar s/n-s/n Manantiales 93400 Papantla de Olarte Ver",
+    address: "Heroico Colegio Militar s/n-s/n, Manantiales, 93400 Papantla de Olarte, Ver.",
     phone: "784 842 3112",
     mapUrl: "https://maps.app.goo.gl/1B8GdK4MsHbvT99B6",
-    image: "/images/locals/traditional.png"
+    image: "/images/sabores/naku/1.jpg"
   },
   {
     name: "La Boca",
-    address: "Aquiles Serdán 700 Barrio del Zapote 93400 Papantla de Olarte Ver",
+    address: "Aquiles Serdán 700, Barrio del Zapote, 93400 Papantla de Olarte, Ver.",
     phone: "784 842 5756",
     mapUrl: "https://maps.app.goo.gl/p8kS9FGC1SPZArc87",
-    image: "/images/locals/seafood.png"
+    image: "/images/sabores/laboca/1.jpg"
+  },
+  {
+    name: "Restaurante la Parroquia de Papantla",
+    address: "Cjon 16 de Septiembre 114, Barrio del Naranjo, 93400 Papantla de Olarte, Ver.",
+    phone: "784 888 5904",
+    mapUrl: "https://maps.app.goo.gl/R3Nd1hT6jdGC3jG98",
+    image: "/images/sabores/parroquia/1.jpg"
+  },
+  {
+    name: "Al Son del Chapala",
+    address: "Reforma #100 altos, Centro, 93400 Papantla, Ver.",
+    phone: "784 842 3517",
+    mapUrl: "https://maps.app.goo.gl/xP2cWBsnHaMQjGpAA",
+    image: "/images/sabores/chapala/1.jpg"
+  },
+  {
+    name: "Plaza Pardo",
+    address: "Juan Enríquez 105, Centro, 93449 Papantla de Olarte, Ver.",
+    phone: "784 842 0059",
+    mapUrl: "https://maps.app.goo.gl/s1WTaBJCYQrvkhHr9",
+    image: "/images/sabores/plazapardo/1.jpg"
+  },
+  {
+    name: "Restaurante Humo",
+    address: "93400, Cjon 16 de Septiembre 104, Santa Cruz, 93400 Papantla, Ver.",
+    phone: "784 842 0400",
+    mapUrl: "https://maps.app.goo.gl/o3nV7Vq5trXB2jsC9",
+    image: "/images/sabores/humo/1.jpg"
   },
   {
     name: "Restaurante Totonaco",
-    address: "José de Jesús Lázaro Muñoz 104 El Naranjo 93400 Papantla de Olarte Ver",
+    address: "José de Jesús, Lázaro Muñoz 104, El Naranjo, 93400 Papantla de Olarte, Ver.",
     phone: "784 112 2581",
     mapUrl: "https://maps.app.goo.gl/v1k7ytRULDZcV88XA",
-    image: "/images/locals/traditional.png"
+    image: "/images/sabores/totonaco/1.jpg"
   },
   {
     name: "Don Pope Restaurante",
-    address: "Francisco I Madero 206 Barrio del San Juan 93449 Papantla Ver",
+    address: "Francisco I Madero 206, Barrio del San Juan, 93449 Papantla, Ver.",
     phone: "784 213 5289",
     mapUrl: "https://maps.app.goo.gl/fgVBoLuKatkTSvBf7",
-    image: "/images/locals/traditional.png"
+    image: "/images/sabores/donpope/1.jpg"
   },
   {
     name: "Restaurante Papantla Kachikin",
-    address: "Chote - Papantla Barrio del Zapote 93400 Papantla de Olarte Ver",
+    address: "Chote - Papantla, Barrio del Zapote, 93400 Papantla de Olarte, Ver.",
     phone: "784 133 5190",
     mapUrl: "https://maps.app.goo.gl/SwYGng9L6wLUYb3JA",
-    image: "/images/locals/traditional.png"
+    image: "/images/sabores/kachikin/1.jpg"
   },
   {
     name: "Centro Turístico Saberes Ancestrales de la Vainilla",
-    address: "Revolución 116 Barrio del Zapote 93400 Papantla de Olarte Ver",
+    address: "Revolución 116, Barrio del Zapote, 93400 Papantla de Olarte, Ver.",
     phone: "784 115 0077",
     mapUrl: "https://maps.app.goo.gl/ikLEed7rgApJyF6M7",
-    image: "/images/locals/traditional.png"
+    image: "/images/sabores/vainilla/1.jpg"
   },
 ];
 

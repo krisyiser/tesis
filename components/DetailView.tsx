@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MapPin, Share2, Star, Clock, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -44,6 +44,20 @@ export default function DetailView({
     }
   };
 
+  // Handle back button to close gallery
+  useEffect(() => {
+    if (activeImage !== null) {
+      const handlePopState = () => {
+        setActiveImage(null);
+      };
+      window.history.pushState({ galleryOpen: true }, "");
+      window.addEventListener("popstate", handlePopState);
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }
+  }, [activeImage]);
+
   return (
     <div className="min-h-screen bg-background pb-32 font-sans">
       {/* Cinematic Header Image */}
@@ -68,7 +82,7 @@ export default function DetailView({
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
         {/* Top Controls */}
-        <div className="absolute top-12 left-6 right-6 flex items-center justify-between z-10">
+        <div className="absolute top-24 left-6 right-6 flex items-center justify-between z-10">
           <button 
             onClick={() => router.back()}
             className="w-12 h-12 rounded-full bg-black/20 backdrop-blur-3xl border border-white/20 flex items-center justify-center text-white active:scale-90 transition-all shadow-xl"
@@ -183,7 +197,7 @@ export default function DetailView({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-10 backdrop-blur-xl"
+              className="fixed inset-0 z-[10000] bg-black/95 flex items-center justify-center p-4 md:p-10 backdrop-blur-xl"
             >
               <button 
                 onClick={() => setActiveImage(null)}
