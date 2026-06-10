@@ -12,9 +12,20 @@ export default function HotelDetailPage() {
   const decodedId = decodeURIComponent(id);
   const found = tourismData.find(item => item.id === decodedId);
   
+  const iconMap: Record<string, any> = {
+    bed: Bed,
+    shield: Shield,
+    wifi: Wifi,
+    coffee: Coffee,
+    clock: Clock,
+  };
+
   const data = found ? {
     ...found,
-    details: found.details || [
+    details: found.details?.map(d => ({
+      ...d,
+      icon: iconMap[d.icon] || Coffee
+    })) || [
       { label: "Habitaciones", value: "Disponibles", icon: Bed },
       { label: "Servicios", value: "Wifi/TV", icon: Wifi },
     ],

@@ -70,7 +70,20 @@ export const tourismData: TourismItem[] = [
     category: "hospedaje",
     coords: [20.4470, -97.3230],
     phone: "7848420121",
-    address: "José de Jesús Núñez 104, El Naranjo, 93400 Papantla, Ver."
+    address: "José de Jesús Núñez 104, El Naranjo, 93400 Papantla, Ver.",
+    details: [
+      { label: "Habitaciones", value: "Aires Acondicionados", icon: "bed" },
+      { label: "Servicios", value: "Alberca y Wifi", icon: "wifi" },
+      { label: "Atención", value: "Desde 1951", icon: "clock" },
+      { label: "Seguridad", value: "24 Horas", icon: "shield" }
+    ],
+    gallery: [
+      "/images/hotels/tajin/facade.jpg",
+      "/images/hotels/tajin/pool.jpg",
+      "/images/hotels/tajin/lobby.jpg",
+      "/images/hotels/tajin/room1.jpg",
+      "/images/hotels/tajin/room2.jpg"
+    ]
   },
   {
     id: "hotel-vista-inn",
