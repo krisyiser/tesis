@@ -148,17 +148,48 @@ export default function DetailView({
                <MapPin className="w-6 h-6 text-primary" />
                Ubicación
             </h2>
-            <div className="h-64 w-full bg-gray-100 dark:bg-white/5 rounded-[40px] border border-black/5 dark:border-white/5 relative overflow-hidden group">
-               {/* Placeholder for Map - In real app, we'd use Leaflet here too */}
-               <div className="absolute inset-0 bg-primary/5 flex items-center justify-center p-8 text-center text-muted-foreground italic font-medium">
-                  {location}
+            <div className="w-full bg-gray-100 dark:bg-white/5 rounded-[40px] border border-black/5 dark:border-white/5 relative overflow-hidden group shadow-2xl">
+               <div className="absolute inset-0 opacity-20 dark:opacity-10 pointer-events-none">
+                  <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
                </div>
-               <button 
-                  onClick={() => window.open(`https://www.google.com/maps/search/${encodeURIComponent(title + " " + location)}`, "_blank")}
-                  className="absolute bottom-6 right-6 bg-primary text-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl flex items-center gap-2 group-hover:scale-105 transition-transform"
-               >
-                  <ExternalLink className="w-4 h-4" /> Abrir Mapas
-               </button>
+               
+               <div className="p-8 pb-32">
+                  <div className="flex items-start gap-4">
+                     <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center shrink-0">
+                        <MapPin className="w-6 h-6 text-primary" />
+                     </div>
+                     <div className="flex flex-col gap-2">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Dirección Exacta</span>
+                        <p className="text-lg font-bold text-foreground leading-snug">
+                           {location}
+                        </p>
+                        <p className="text-xs text-muted-foreground font-medium">
+                           Papantla de Olarte, Veracruz, México.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+
+               <div className="h-48 w-full bg-zinc-200 dark:bg-zinc-800 relative">
+                  {/* Stylized Map View */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                     <div className="relative">
+                        <div className="w-20 h-20 bg-primary/20 rounded-full animate-ping absolute -inset-6 opacity-30"></div>
+                        <div className="w-8 h-8 bg-primary rounded-full border-4 border-white dark:border-zinc-900 shadow-xl relative z-10 flex items-center justify-center">
+                           <div className="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  {/* Open Maps Button Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                  <button 
+                     onClick={() => window.open(`https://www.google.com/maps/search/${encodeURIComponent(title + " " + location)}`, "_blank")}
+                     className="absolute bottom-6 right-6 bg-primary text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl flex items-center gap-3 group-hover:scale-105 active:scale-95 transition-all"
+                  >
+                     <ExternalLink className="w-4 h-4" /> Abrir en Google Maps
+                  </button>
+               </div>
             </div>
           </div>
         )}

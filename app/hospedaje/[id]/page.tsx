@@ -22,6 +22,7 @@ export default function HotelDetailPage() {
 
   const data = found ? {
     ...found,
+    location: found.address || found.location,
     details: found.details?.map(d => ({
       ...d,
       icon: iconMap[d.icon] || Coffee
