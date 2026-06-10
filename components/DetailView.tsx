@@ -44,19 +44,27 @@ export default function DetailView({
     }
   };
 
-  // Handle back button to close gallery
+  // Handle back button to close gallery and auto-play
   useEffect(() => {
-    if (activeImage !== null) {
+    let interval: NodeJS.Timeout;
+    if (activeImage !== null && gallery && gallery.length > 1) {
+      // Auto-play every 5 seconds
+      interval = setInterval(() => {
+        nextImage();
+      }, 5000);
+
       const handlePopState = () => {
         setActiveImage(null);
       };
       window.history.pushState({ galleryOpen: true }, "");
       window.addEventListener("popstate", handlePopState);
+      
       return () => {
+        clearInterval(interval);
         window.removeEventListener("popstate", handlePopState);
       };
     }
-  }, [activeImage]);
+  }, [activeImage, gallery]);
 
   return (
     <div className="min-h-screen bg-background pb-32 font-sans">

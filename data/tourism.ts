@@ -132,7 +132,17 @@ export const tourismData: TourismItem[] = [
     coords: [20.4505, -97.3265],
     phone: "7848420400",
     address: "93400, Cjon 16 de Septiembre 104, Santa Cruz, 93400 Papantla, Ver.",
-    gallery: ["/images/sabores/humo/1.jpg"]
+    gallery: [
+      "/images/sabores/humo/1.jpg",
+      "/images/sabores/humo/2.jpg",
+      "/images/sabores/humo/3.jpg",
+      "/images/sabores/humo/4.jpg",
+      "/images/sabores/humo/5.jpg",
+      "/images/sabores/humo/6.jpg",
+      "/images/sabores/humo/7.jpg",
+      "/images/sabores/humo/8.jpg",
+      "/images/sabores/humo/9.jpg"
+    ]
   },
   {
     id: "restaurante-totonaco",
@@ -397,5 +407,81 @@ export const tourismData: TourismItem[] = [
       "/images/hotels/arenas/ARENAS4.jpeg"
     ]
 
+  },
+  // ALIMENTOS Y BEBIDAS
+  {
+    id: "cafe-catedral",
+    title: "Café Catedral",
+    subtitle: "Aroma y Tradición",
+    description: "Un espacio acogedor frente a la catedral donde el café papanteco es el protagonista.",
+    imageUrl: "/images/sabores/cafecatedral/1.jpg",
+    rating: "4.8",
+    tag: "Cafetería",
+    location: "Barrio del Naranjo",
+    category: "sabor",
+    coords: [20.4465, -97.3225],
+    phone: "7848425317",
+    address: "Curato s/n, Barrio del Naranjo, 93400 Poza Rica de Hidalgo, Ver.",
+    gallery: ["/images/sabores/cafecatedral/1.jpg"]
+  },
+  {
+    id: "la-choza-de-lucy",
+    title: "La choza de Lucy",
+    subtitle: "Delicias del Mar",
+    description: "Mariscos frescos con el sazón auténtico de la región en un ambiente relajado.",
+    imageUrl: "/images/sabores/chozalucy/1.jpg",
+    rating: "4.7",
+    tag: "Mariscos",
+    location: "Barrio del Zapote",
+    category: "sabor",
+    coords: [20.4465, -97.3225],
+    phone: "7848424980",
+    address: "Cjon 16 de Septiembre centro 829, Barrio del Zapote, 93400 Papantla de Olarte, Ver.",
+    gallery: ["/images/sabores/chozalucy/1.jpg"]
+  },
+  {
+    id: "zacahuil-perla",
+    title: "Zacahuil Perla",
+    subtitle: "El Gigante de la Huasteca",
+    description: "Tradición pura en cada bocado de nuestro zacahuil preparado artesanalmente.",
+    imageUrl: "/images/sabores/zacahuilperla/1.jpg",
+    rating: "4.9",
+    tag: "Comida Típica",
+    location: "Barrio del Zapote",
+    category: "sabor",
+    coords: [20.4465, -97.3225],
+    phone: "7841346603",
+    address: "Cjon 16 de Septiembre 907, Barrio del Zapote, 93400 Papantla de Olarte, Ver.",
+    gallery: ["/images/sabores/zacahuilperla/1.jpg"]
+  },
+  {
+    id: "sushi-&-drinks-mr.-rollo",
+    title: "SUSHI & DRINKS MR. ROLLO",
+    subtitle: "Fusion & Mixology",
+    description: "Lo mejor del sushi con un toque local y coctelería de autor.",
+    imageUrl: "/images/sabores/mrrollo/1.jpg",
+    rating: "4.6",
+    tag: "Sushi",
+    location: "Barrio del Naranjo",
+    category: "sabor",
+    coords: [20.4465, -97.3225],
+    phone: "",
+    address: "C. José de J. Núñez 18, Barrio del Naranjo, 93400 Papantla de Olarte, Ver.",
+    gallery: ["/images/sabores/mrrollo/1.jpg"]
+  },
+  {
+    id: "pizzas-y-volovanes-el-uli-sucursal-centro",
+    title: "Pizzas y Volovanes El Uli",
+    subtitle: "Sabor que Encanta",
+    description: "Pizzas artesanales y los famosos volovanes de la región.",
+    imageUrl: "/images/sabores/pizzasuli/1.jpg",
+    rating: "4.5",
+    tag: "Pizzería",
+    location: "Centro",
+    category: "sabor",
+    coords: [20.4465, -97.3225],
+    phone: "7848420064",
+    address: "C. José de J. Núñez s/n, Centro, 93400 Papantla, Ver.",
+    gallery: ["/images/sabores/pizzasuli/1.jpg"]
   }
 ];

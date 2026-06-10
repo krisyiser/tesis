@@ -102,29 +102,25 @@ const traditionalRestaurants = [
 ];
 
 const foodBusinesses = [
-  // Cafeterías
-  { name: "Café Catedral", address: "Curato s/n Barrio del Naranjo 93400 Papantla Ver", phone: "784 842 5317", mapUrl: "https://maps.app.goo.gl/Xk78Zq2sGodrBbMz8", categories: ["Cafetería"], image: "/images/locals/cafe.png" },
-  { name: "Café Del Centro", address: "Artes 108 Barrio del San Juan 93400 Papantla Ver", phone: "784 842 1163", mapUrl: "https://maps.app.goo.gl/mcuXHDvVN4Vymr4Z8", categories: ["Cafetería", "Snacks"], image: "/images/locals/cafe.png" },
-  { name: "Me Perdonas", address: "C. Rodolfo Curti 118 Santa Cruz 93400 Papantla de Olarte Ver", phone: "784 121 8557", mapUrl: "https://maps.app.goo.gl/BURRJANMVhE74zd6A", categories: ["Cafetería", "Snacks"], image: "/images/locals/cafe.png" },
-  
-  // Típica / Antojitos
-  { name: "Las Canastas", address: "José Azueta 105 Barrio del San Juan 93400 Papantla de Olarte Ver", phone: "784 144 2168", mapUrl: "https://maps.app.goo.gl/t9JHDca26PVxULpH8", categories: ["Comida Típica", "Antojitos"], image: "/images/locals/traditional.png" },
-  { name: "Zacahuil Perla", address: "Cjon 16 de Septiembre 907 Barrio del Zapote 93400 Papantla de Olarte Ver", phone: "784 134 6603", mapUrl: "https://maps.app.goo.gl/sZgU1sqJPnqZMnqW9", categories: ["Comida Típica"], image: "/images/locals/traditional.png" },
-  { name: "Antojitos Doña Carmen", address: "De La Libertad 308 Barrio del Zapote 93440 Papantla de Olarte Ver", phone: "784 688 1200", mapUrl: "https://maps.app.goo.gl/TdZfzCBfTW5W344M7", categories: ["Antojitos"], image: "/images/locals/traditional.png" },
-  
-  // Internacional / Snacks
-  { name: "Clandestino", address: "C. Andrés Q.R. 201 Barrio del Naranjo 93400 Papantla de Olarte Ver", phone: "784 849 9423", mapUrl: "https://maps.app.goo.gl/BF1V2jTwzacvyUx39", categories: ["Pizzería", "Hamburguesas"], image: "/images/locals/tacos.png" },
-  { name: "Las tortugas", address: "C. José de J. Núñez Col Barrio del Naranjo 93400 Papantla de Olarte Ver", phone: "784 121 4753", mapUrl: "https://maps.app.goo.gl/z3rgAuksDregf8Z28", categories: ["Pizzería", "Hamburguesas"], image: "/images/locals/tacos.png" },
-  { name: "SUSHI & DRINKS MR. ROLLO", address: "C. José de J. Núñez 18 Barrio del Naranjo 93400 Papantla de Olarte Ver", phone: "", mapUrl: "https://maps.app.goo.gl/dhzD1EHxZC44JK9b8", categories: ["Sushi", "Snacks"], image: "/images/locals/traditional.png" },
-
-  // Mariscos
-  { name: "La choza de Lucy", address: "Cjon 16 de Septiembre centro 829 Barrio del Zapote 93400 Papantla de Olarte Ver", phone: "784 842 4980", mapUrl: "https://maps.app.goo.gl/ZH4ME7xq2ynUotJc8", categories: ["Mariscos"], image: "/images/locals/seafood.png" },
-  { name: "La Jarochita", address: "Leandro Valle s/n Centro 93449 Papantla de Olarte Ver", phone: "784 134 4357", mapUrl: "https://maps.app.goo.gl/wvJmUfWwtEweX3tr7", categories: ["Mariscos", "Bares"], image: "/images/locals/seafood.png" },
-
-  // Taquerías
-  { name: "Tacos Rojos", address: "Barrio del San Juan 93449 Papantla de Olarte Ver", phone: "", mapUrl: "https://maps.app.goo.gl/UzQLrQURAViDvh1A7", categories: ["Taquería"], image: "/images/locals/tacos.png" },
-  { name: "Taqueria Pozo del Zanjon", address: "C. Josefa Ortiz de Domínguez 101 Barrio del Zapote 93400 Papantla de Olarte Ver", phone: "", mapUrl: "https://maps.app.goo.gl/f2HKzufattpntCSs6", categories: ["Taquería"], image: "/images/locals/tacos.png" },
-  { name: "Super Taquería El Gordo", address: "calle Francisco I. Madero Barrio del San Juan 93400 Papantla Ver", phone: "784 108 7880", mapUrl: "https://maps.app.goo.gl/2jPkouqjDNF1C6mq6", categories: ["Taquería"], image: "/images/locals/tacos.png" },
+  { name: "Café Catedral", address: "Curato s/n, Barrio del Naranjo, 93400 Poza Rica de Hidalgo, Ver.", phone: "784 842 5317", mapUrl: "https://maps.app.goo.gl/Xk78Zq2sGodrBbMz8", categories: ["Cafetería"], image: "/images/sabores/cafecatedral/1.jpg" },
+  { name: "La choza de Lucy", address: "Cjon 16 de Septiembre centro 829, Barrio del Zapote, 93400 Papantla de Olarte, Ver.", phone: "784 842 4980", mapUrl: "https://maps.app.goo.gl/ZH4ME7xq2ynUotJc8", categories: ["Mariscos"], image: "/images/sabores/chozalucy/1.jpg" },
+  { name: "Zacahuil \"Perla\"", address: "Cjon 16 de Septiembre 907, Barrio del Zapote, 93400 Papantla de Olarte, Ver.", phone: "784 134 6603", mapUrl: "https://maps.app.goo.gl/sZgU1sqJPnqZMnqW9", categories: ["Comida Típica"], image: "/images/sabores/zacahuilperla/1.jpg" },
+  { name: "SUSHI & DRINKS MR. ROLLO", address: "C. José de J. Núñez 18, Barrio del Naranjo, 93400 Papantla de Olarte, Ver.", phone: "", mapUrl: "https://maps.app.goo.gl/dhzD1EHxZC44JK9b8", categories: ["Sushi y Comida Asiática", "Bebidas y coctelería", "Snacks"], image: "/images/sabores/mrrollo/1.jpg" },
+  { name: "Pizzas y Volovanes El Uli Sucursal Centro", address: "C. José de J. Núñez s/n, Centro, 93400 Papantla, Ver.", phone: "7848420064", mapUrl: "https://maps.app.goo.gl/p8kS9FGC1SPZArc87", categories: ["Pizzería", "Hamburguesas y Tortas"], image: "/images/sabores/pizzasuli/1.jpg" },
+  { name: "Idea Pizza", address: "Cjon 16 de Septiembre 101, Centro, 93400 Papantla de Olarte, Ver.", phone: "7848422083", mapUrl: "https://maps.app.goo.gl/Xk78Zq2sGodrBbMz8", categories: ["Pizzería"], image: "/images/sabores/ideapizza/1.jpg" },
+  { name: "Las Canastas", address: "José Azueta 105, Barrio del San Juan, 93400 Papantla de Olarte, Ver.", phone: "784 144 2168", mapUrl: "https://maps.app.goo.gl/t9JHDca26PVxULpH8", categories: ["Comida Típica"], image: "/images/sabores/canastas/1.jpg" },
+  { name: "Mexicanísimas", address: "Juan Enríquez 213, Barrio del Naranjo, 93400 Papantla de Olarte, Ver.", phone: "784 114 0955", mapUrl: "https://maps.app.goo.gl/SbMdHBw4hghZmcNQ9", categories: ["Comida Típica"], image: "/images/sabores/mexicanisimas/1.jpg" },
+  { name: "Café Del Centro", address: "Artes 108, Barrio del San Juan, 93400 Papantla, Ver.", phone: "784 842 1163", mapUrl: "https://maps.app.goo.gl/mcuXHDvVN4Vymr4Z8", categories: ["Cafetería", "Snacks", "Hamburguesas y Tortas"], image: "/images/sabores/cafecentro/1.jpg" },
+  { name: "Me Perdonas ️", address: "C. Rodolfo Curti 118, Santa Cruz, 93400 Papantla de Olarte, Ver.", phone: "784 121 8557", mapUrl: "https://maps.app.goo.gl/BURRJANMVhE74zd6A", categories: ["Cafetería", "Snacks", "Helados y Postres"], image: "/images/sabores/meperdonas/1.jpg" },
+  { name: "Clandestino", address: "C. Andrés Q.R. 201, Barrio del Naranjo, 93400 Papantla de Olarte, Ver.", phone: "784 849 9423", mapUrl: "https://maps.app.goo.gl/BF1V2jTwzacvyUx39", categories: ["Hamburguesas y Tortas", "Snacks"], image: "/images/sabores/clandestino/1.jpg" },
+  { name: "La Jarochita", address: "Leandro Valle s/n, Centro, 93449 Papantla de Olarte, Ver.", phone: "784 134 4357", mapUrl: "https://maps.app.goo.gl/wvJmUfWwtEweX3tr7", categories: ["Mariscos", "Bebidas y coctelería", "Bares y Cantinas"], image: "/images/sabores/jarochita/1.jpg" },
+  { name: "Tacos Rojos", address: "Barrio del San Juan, 93449 Papantla de Olarte, Ver.", phone: "", mapUrl: "https://maps.app.goo.gl/UzQLrQURAViDvh1A7", categories: ["Taquería"], image: "/images/sabores/tacosrojos/1.jpg" },
+  { name: "Taqueria Pozo del Zanjon", address: "C. Josefa Ortiz de Domínguez 101, Barrio del Zapote, 93400 Papantla de Olarte, Ver.", phone: "", mapUrl: "https://maps.app.goo.gl/f2HKzufattpntCSs6", categories: ["Taquería"], image: "/images/sabores/pozozanjon/1.jpg" },
+  { name: "Taqueria EL TIZON", address: "Veracruz - Poza Rica 505, Barrio del San Juan, 93400 Papantla de Olarte, Ver.", phone: "", mapUrl: "https://maps.app.goo.gl/APH3EuA9Jw1vuwgv7", categories: ["Taquería"], image: "/images/sabores/eltizon/1.jpg" },
+  { name: "Super Taquería \"El Gordo\"", address: "calle Francisco I. Madero FRENTE A WALDOS, Barrio del San Juan, 93400 Papantla, Ver.", phone: "784 108 7880", mapUrl: "https://maps.app.goo.gl/2jPkouqjDNF1C6mq6", categories: ["Taquería"], image: "/images/sabores/elgordo/1.jpg" },
+  { name: "Taquería Serpet", address: "93400, Barrio del San Juan, 93400 Papantla, Ver.", phone: "", mapUrl: "https://maps.app.goo.gl/xvArA9h59CsAor6i9", categories: ["Taquería"], image: "/images/sabores/serpet/1.jpg" },
+  { name: "Antojitos Doña Carmen", address: "De La Libertad 308, Barrio del Zapote, 93440 Papantla de Olarte, Ver.", phone: "784 688 1200", mapUrl: "https://maps.app.goo.gl/TdZfzCBfTW5W344M7", categories: ["Antojitos"], image: "/images/sabores/donacarmen/1.jpg" },
+  { name: "Las tortugas", address: "C. José de J. Núñez Col, Barrio del Naranjo, 93400 Papantla de Olarte, Ver.", phone: "784 121 4753", mapUrl: "https://maps.app.goo.gl/z3rgAuksDregf8Z28", categories: ["Hamburguesas y Tortas"], image: "/images/sabores/tortugas/1.jpg" },
 ];
 
 const categories = [
@@ -132,10 +128,15 @@ const categories = [
   "Comida Típica",
   "Antojitos",
   "Cafetería",
+  "Sushi y Comida Asiática",
   "Taquería",
   "Pizzería",
-  "Hamburguesas",
+  "Hamburguesas y Tortas",
   "Mariscos",
+  "Snacks",
+  "Helados y Postres",
+  "Bebidas y coctelería",
+  "Bares y Cantinas",
 ];
 
 function SaborContent() {
